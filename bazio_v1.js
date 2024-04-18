@@ -1,5 +1,9 @@
-const lit7 = '#0f0';
-const unlit7 = '#700';
+const color_lit7 = '#0f0';
+const color_unlit7 = '#700';
+const color_on  = '#0f0';
+const color_off = 'red';
+
+var toggle_state = [0, 0, 0, 0, 0, 0, 0, 0];
 
 function action(name, type) {
     const lastIndex = name.lastIndexOf('_');
@@ -9,10 +13,20 @@ function action(name, type) {
         case 'toggle_button':
             return function () {
                 console.log(type, "toggle number", number);
+                if (type == 'release') {
+                    toggle_state[number] = 1 - toggle_state[number]
+                }
+                SVGs[name].setAttribute('fill',
+                    toggle_state[number]? color_on : color_off);
             };
         case 'momentary_button':
             return function () {
                 console.log(type, "momentary number", number);
+                if (type == 'press') {
+                    SVGs[name].setAttribute('fill', color_on);
+                } else {
+                    SVGs[name].setAttribute('fill', color_off);
+                }
             };
     }
 }
@@ -103,7 +117,7 @@ function adjust_size() {
             //   g
             // e   c
             //   d
-            SVGs[name].setAttribute('fill', unlit7);
+            SVGs[name].setAttribute('fill', color_unlit7);
             SVGs[name].setAttribute('stroke', 'white');
             SVGs[name].setAttribute('stroke-width', 1);
             SVGs[name].setAttribute('x', x0 + xywh[j][0]);
@@ -116,7 +130,7 @@ function adjust_size() {
     for (let i = 0; i <= 7; i++) {
         var x = screen_W/2 - W/2 + (7-i)*(W-2*margin)/8 + margin;
         var name = 'toggle_button_' + i;
-        SVGs[name].setAttribute('fill', 'red');
+        SVGs[name].setAttribute('fill', color_off);
         SVGs[name].setAttribute('stroke', 'white');
         SVGs[name].setAttribute('stroke-width', 1);
         SVGs[name].setAttribute('x', x);
@@ -124,7 +138,7 @@ function adjust_size() {
         SVGs[name].setAttribute('width', W/9);
         SVGs[name].setAttribute('height', H/9);
         var name = 'momentary_button_' + i;
-        SVGs[name].setAttribute('fill', 'red');
+        SVGs[name].setAttribute('fill', color_off);
         SVGs[name].setAttribute('stroke', 'white');
         SVGs[name].setAttribute('stroke-width', 1);
         SVGs[name].setAttribute('x', x);
