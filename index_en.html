@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <title>RUDIMIO</title>
+        <meta charset="utf-8"/>
+    </head>
+    <body>
+        <script src="rudimio_v1.js"></script>
+        <script src="app.js"></script>
+        <h1>RUDIMIO</h1>
+        <p><a href="index.html">Version française</a></p>
+        <h2>Rudimentary Input/Output</h2>
+        <h3>Buttons</h3>
+        <p>The toggle buttons (first line) will trigger those functions
+        with no parameter on release:</p>
+        <ul>
+            <li>toggle_0 to toggle_7</li>
+        </ul>
+
+        <p>The momentary buttons (second line) will trigger those functions
+        with no parameter:</p>
+        <ul>
+            <li>press_0 to press_7</li>
+            <li>release_0 to release_7</li>
+        </ul>
+
+        <p>A variable holds the state of the toggle buttons:</p>
+        <p>toggle_state = [0, 0, 0, 0, 0, 0, 0, 0]</p>
+
+        <h3>Display</h3>
+        <p>4×7 functions have been defined for handling the display.
+        All take one parameter: 0 or 1.</p>
+        <ul>
+            <li>segment_0_a(on_off)</li>
+            <li>segment_0_b(on_off)</li>
+            <li>segment_0_c(on_off)</li>
+            <li>segment_0_d(on_off)</li>
+            <li>segment_0_e(on_off)</li>
+            <li>segment_0_f(on_off)</li>
+            <li>segment_0_g(on_off)</li>
+        </ul>
+        <p>And the same for the displays number 1 to 3.</p>
+        <p></p>
+    </body>
+</html>
