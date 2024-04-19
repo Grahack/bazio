@@ -137,7 +137,7 @@ function adjust_size() {
     }
 
     for (let i = 0; i <= 7; i++) {
-        var x = screen_W/2 - W/2 + (7-i)*(W-2*margin)/8 + margin;
+        const x = screen_W/2 - W/2 + (7-i)*(W-2*margin)/8 + margin;
         var name = 'toggle_button_' + i;
         SVGs[name].setAttribute('fill', color_off);
         SVGs[name].setAttribute('stroke', 'white');
