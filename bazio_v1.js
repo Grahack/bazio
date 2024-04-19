@@ -15,6 +15,9 @@ function action(name, type) {
                 console.log(type, "toggle number", number);
                 if (type == 'release') {
                     toggle_state[number] = 1 - toggle_state[number]
+                    const fn_name = 'toggle_' + number;
+                    if (window[fn_name]) window[fn_name]();
+                    else console.log("No function", fn_name);
                 }
                 SVGs[name].setAttribute('fill',
                     toggle_state[number]? color_on : color_off);
@@ -24,8 +27,14 @@ function action(name, type) {
                 console.log(type, "momentary number", number);
                 if (type == 'press') {
                     SVGs[name].setAttribute('fill', color_on);
+                    const fn_name = 'press_' + number;
+                    if (window[fn_name]) window[fn_name]();
+                    else console.log("No function", fn_name);
                 } else {
                     SVGs[name].setAttribute('fill', color_off);
+                    const fn_name = 'release_' + number;
+                    if (window[fn_name]) window[fn_name]();
+                    else console.log("No function", fn_name);
                 }
             };
     }
@@ -157,3 +166,44 @@ document.body.appendChild(main_frame);
 window.addEventListener('resize', adjust_size);
 adjust_size();
 console.log(SVGs);
+
+var fns = {};
+for (let i = 0; i <= 3; i++) {
+    for (let j = 0; j <= 6; j++) {
+        const letter = ["a","b","c","d","e","f","g"][j];
+        const name = '' + i + '_' + letter;
+        fns[name] = function (on_off) {
+            SVGs['display_' + i + '_' + letter].setAttribute('fill',
+                on_off? color_lit7 : color_unlit7);
+        };
+    }
+}
+
+function segment_0_a(on_off) {fns['0_a'](on_off);}
+function segment_0_b(on_off) {fns['0_b'](on_off);}
+function segment_0_c(on_off) {fns['0_c'](on_off);}
+function segment_0_d(on_off) {fns['0_d'](on_off);}
+function segment_0_e(on_off) {fns['0_e'](on_off);}
+function segment_0_f(on_off) {fns['0_f'](on_off);}
+function segment_0_g(on_off) {fns['0_g'](on_off);}
+function segment_1_a(on_off) {fns['1_a'](on_off);}
+function segment_1_b(on_off) {fns['1_b'](on_off);}
+function segment_1_c(on_off) {fns['1_c'](on_off);}
+function segment_1_d(on_off) {fns['1_d'](on_off);}
+function segment_1_e(on_off) {fns['1_e'](on_off);}
+function segment_1_f(on_off) {fns['1_f'](on_off);}
+function segment_1_g(on_off) {fns['1_g'](on_off);}
+function segment_2_a(on_off) {fns['2_a'](on_off);}
+function segment_2_b(on_off) {fns['2_b'](on_off);}
+function segment_2_c(on_off) {fns['2_c'](on_off);}
+function segment_2_d(on_off) {fns['2_d'](on_off);}
+function segment_2_e(on_off) {fns['2_e'](on_off);}
+function segment_2_f(on_off) {fns['2_f'](on_off);}
+function segment_2_g(on_off) {fns['2_g'](on_off);}
+function segment_3_a(on_off) {fns['3_a'](on_off);}
+function segment_3_b(on_off) {fns['3_b'](on_off);}
+function segment_3_c(on_off) {fns['3_c'](on_off);}
+function segment_3_d(on_off) {fns['3_d'](on_off);}
+function segment_3_e(on_off) {fns['3_e'](on_off);}
+function segment_3_f(on_off) {fns['3_f'](on_off);}
+function segment_3_g(on_off) {fns['3_g'](on_off);}
