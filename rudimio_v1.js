@@ -4,6 +4,10 @@ const color_on  = '#0f0';
 const color_off = 'red';
 
 var toggle_state = [0, 0, 0, 0, 0, 0, 0, 0];
+var display_state = [[0, 0, 0, 0, 0, 0, 0],
+                     [0, 0, 0, 0, 0, 0, 0],
+                     [0, 0, 0, 0, 0, 0, 0],
+                     [0, 0, 0, 0, 0, 0, 0]];
 
 function action(name, type) {
     const lastIndex = name.lastIndexOf('_');
@@ -126,7 +130,8 @@ function adjust_size() {
             //   g
             // e   c
             //   d
-            SVGs[name].setAttribute('fill', color_unlit7);
+            const lit = display_state[i][j];
+            SVGs[name].setAttribute('fill', lit? color_lit7 : color_unlit7);
             SVGs[name].setAttribute('stroke', 'white');
             SVGs[name].setAttribute('stroke-width', 1);
             SVGs[name].setAttribute('x', x0 + xywh[j][0]);
@@ -176,6 +181,7 @@ for (let i = 0; i <= 3; i++) {
         fns[name] = function (on_off) {
             SVGs['display_' + i + '_' + letter].setAttribute('fill',
                 on_off? color_lit7 : color_unlit7);
+            display_state[i][j] = on_off;
         };
     }
 }
