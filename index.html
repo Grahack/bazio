@@ -11,14 +11,15 @@
         <p><a href="index_en.html">English version</a></p>
         <h2>Entrées/Sorties rudimentaires</h2>
         <h3>Boutons</h3>
-        <p>Les boutons à bascule (première ligne) déclenchent ces fonctions
-        sans paramètre quand on les relache :</p>
+        <p>Ils sont numérotés de 0 à 7 (de droite à gauche).</p>
+        <p>Quand on les relache, les boutons à bascule (première ligne)
+        déclenchent les fonctions suivantes sans paramètre :</p>
         <ul>
             <li>de toggle_0 à toggle_7</li>
         </ul>
 
-        <p>Les boutons momentanés (seconde ligne) déclenchent ces fonctions
-        sans paramètre :</p>
+        <p>Les boutons momentanés (seconde ligne) déclenchent les fonctions
+        suivantes sans paramètre :</p>
         <ul>
             <li>de press_0 à press_7</li>
             <li>de release_0 à release_7</li>
@@ -29,7 +30,8 @@
 
         <h3>Affichage</h3>
         <p>4×7 fonctions ont été définies pour gérer l’affichage.
-        Elles attendent toutes un argument : 0 or 1.</p>
+        Elles attendent toutes un argument : 0 ou 1. Voici par exemple celles
+        qui correspondent au caractère à droite, numéroté 0 :</p>
         <ul>
             <li>segment_0_a(on_off)</li>
             <li>segment_0_b(on_off)</li>
@@ -39,7 +41,17 @@
             <li>segment_0_f(on_off)</li>
             <li>segment_0_g(on_off)</li>
         </ul>
-        <p>Idem pour les numéros 1 à 3.</p>
+        <p>Idem pour les numéros 1 à 3, de droite à gauche. Voici la
+        correspondance entre lettre et position :</p>
+        <pre> -- a --
+|       |
+f       b
+|       |
+ -- g --
+|       |
+e       c
+|       |
+ -- d --</pre>
         <h2>Applications</h2>
         <p>L’appli préchargée va afficher quelque chose qui a un rapport avec
         les boutons à bascule lors de la pression du bouton momentané 0.
