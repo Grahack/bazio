@@ -103,9 +103,9 @@ function adjust_size() {
     SVGs['main_rect'].setAttribute('height', H-2*margin);
 
     const h_os = W/25; // horiz offset
-    const v_os = H/20; // vert offset
+    const v_os = H/26; // vert offset
     const h_len = W/11; // horiz length
-    const v_len = H/9; // vert length
+    const v_len = H/8; // vert length
     const thinner = 30;
     const xywh = [
         [h_os,          0,       h_len, H/thinner],  // a
