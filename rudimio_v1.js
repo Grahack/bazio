@@ -214,3 +214,5 @@ function segment_3_d(on_off) {fns['3_d'](on_off);}
 function segment_3_e(on_off) {fns['3_e'](on_off);}
 function segment_3_f(on_off) {fns['3_f'](on_off);}
 function segment_3_g(on_off) {fns['3_g'](on_off);}
+
+function segment(place, seg, on_off) {fns[place + '_' + seg](on_off);}
