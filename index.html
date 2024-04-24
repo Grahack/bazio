@@ -3,6 +3,7 @@
     <head>
         <title>ELEMENTARIO</title>
         <meta charset="utf-8"/>
+        <link rel="stylesheet" type="text/css" href="style.css" />
     </head>
     <body>
         <script src="elementario_v1.js"></script>
@@ -23,31 +24,31 @@ function press_7() {
         <p>Quand on les relache, les boutons à bascule (première ligne)
         déclenchent les fonctions suivantes sans paramètre :</p>
         <ul>
-            <li>de toggle_0 à toggle_7</li>
+            <li><code>toggle_0</code> to <code>toggle_7</code></li>
         </ul>
 
         <p>Les boutons momentanés (seconde ligne) déclenchent les fonctions
         suivantes sans paramètre :</p>
         <ul>
-            <li>de press_0 à press_7</li>
-            <li>de release_0 à release_7</li>
+            <li><code>press_0</code> to <code>press_7</code></li>
+            <li><code>release_0</code> to <code>release_7</code></li>
         </ul>
 
         <p>Une variable stocke l’état des boutons à bascule :</p>
-        <p>toggle_state = [0, 0, 0, 0, 0, 0, 0, 0]</p>
+        <p><code>toggle_state = [0, 0, 0, 0, 0, 0, 0, 0]</code></p>
 
         <h3>Affichage</h3>
         <p>4×7 fonctions ont été définies pour gérer l’affichage.
         Elles attendent toutes un argument : 0 ou 1. Voici par exemple celles
         qui correspondent au caractère à droite, numéroté 0 :</p>
         <ul>
-            <li>segment_0_a(on_off)</li>
-            <li>segment_0_b(on_off)</li>
-            <li>segment_0_c(on_off)</li>
-            <li>segment_0_d(on_off)</li>
-            <li>segment_0_e(on_off)</li>
-            <li>segment_0_f(on_off)</li>
-            <li>segment_0_g(on_off)</li>
+            <li><code>segment_0_a(on_off)</code></li>
+            <li><code>segment_0_b(on_off)</code></li>
+            <li><code>segment_0_c(on_off)</code></li>
+            <li><code>segment_0_d(on_off)</code></li>
+            <li><code>segment_0_e(on_off)</code></li>
+            <li><code>segment_0_f(on_off)</code></li>
+            <li><code>segment_0_g(on_off)</code></li>
         </ul>
         <p>Idem pour les numéros 1 à 3, de droite à gauche. Voici la
         correspondance entre lettre et position :</p>
@@ -62,11 +63,13 @@ e       c
  -- d --</pre>
         <p>La fonction suivante peut aussi être pratique :</p>
         <ul>
-            <li>segment(place, seg, on_off)</li>
+            <li><code>segment(place, seg, on_off)</code></li>
         </ul>
         <h2>Applications</h2>
         <p>L’appli préchargée va afficher quelque chose qui a un rapport avec
         les boutons à bascule lors de la pression du bouton momentané 0.
         Pouvez-vous deviner ce que c’est ?</p>
+        <p>Vous pouvez de plus charger votre propre code pour modifier le
+        comportement d’Elementario grâce au bouton <em>Charger</em>.</p>
     </body>
 </html>
