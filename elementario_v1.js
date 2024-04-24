@@ -173,6 +173,35 @@ window.addEventListener('resize', adjust_size);
 adjust_size();
 console.log(SVGs);
 
+const modules = ['abcdef', 'ghi', 'jkl', 'mno', 'pqr', 'stu', 'vwx'];
+var modules_container = document.createElement('div');
+modules_container.className = 'modules';
+document.body.appendChild(modules_container);
+modules.forEach(function (module) {
+    var elt = document.createElement('div');
+    elt.className = 'module';
+    elt.innerHTML = module;
+    modules_container.appendChild(elt);
+    var radioGroup = document.createElement('span');
+    const actions = ['0', 'U', 'T'];
+    actions.forEach(function (action) {
+        var radio = document.createElement('input');
+        radio.type = 'radio';
+        radio.value = module + '_' + action;
+        radio.name = module;
+        radio.id = module + '_' + action;
+        if (action == '0') radio.checked = true;
+        radioGroup.appendChild(radio);
+        var label = document.createElement('label');
+        label.htmlFor = module + '_' + action;
+        label.textContent = action;
+        label.className = 'module-label';
+        radioGroup.appendChild(label);
+    });
+    elt.appendChild(radioGroup);
+    module.innerHTML = module.innerHTML + ' ';
+});
+
 var fns = {};
 for (let i = 0; i <= 3; i++) {
     for (let j = 0; j <= 6; j++) {

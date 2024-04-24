@@ -1,5 +1,9 @@
-pre, code, textarea {
+pre, code, textarea, div.module {
     font-size: 130%;
+}
+
+.module-label {
+    font-size: 80%;
 }
 
 code {
@@ -8,4 +12,20 @@ code {
 
 button {
     display: block;
+}
+
+div.modules {
+    padding: 0.5em;
+}
+
+div.module {
+    display: inline table;
+    border: 1px solid;
+    margin: 0.2em;
+    padding: 0.2em;
+    font-family: monospace;
+}
+
+.module-label {
+    font-family: monospace;
 }
