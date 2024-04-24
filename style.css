@@ -5,3 +5,7 @@ pre, code {
 code {
     background-color: #eee;
 }
+
+button {
+    display: block;
+}
