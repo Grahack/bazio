@@ -216,3 +216,10 @@ function segment_3_f(on_off) {fns['3_f'](on_off);}
 function segment_3_g(on_off) {fns['3_g'](on_off);}
 
 function segment(place, seg, on_off) {fns[place + '_' + seg](on_off);}
+
+function load() {
+    console.log("Loading user src:");
+    const src = document.getElementById('src').value;
+    console.log(src);
+    window.eval(src);  // indirect call to be effective globally
+}
