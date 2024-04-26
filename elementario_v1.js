@@ -225,6 +225,7 @@ document.body.appendChild(modules_container);
 modules.forEach(function (module) {
     var elt = document.createElement('div');
     elt.className = 'module';
+    elt.id = 'module_' + module.name;
     elt.innerHTML = module.name;
     modules_container.appendChild(elt);
     var radioGroup = document.createElement('span');
@@ -300,16 +301,19 @@ function load() {
         // grab the value of the relevant radio button
         const rb_u = document.getElementById(module.name + '_U').checked;
         const rb_t = document.getElementById(module.name + '_T').checked;
+        // and grab the element
+        const module_div = document.getElementById('module_' + module.name);
         if (rb_u) {
             // use module
             console.log("Using " + module.name);
             window[module.name] = module.fn;
-        }
-        if (rb_t) {
+            module_div.style.backgroundColor = '#aaf';
+        } else if (rb_t) {
             // test module
             const fn = window[module.name];
             if (typeof fn !== "function") {
                 console.log(module.name + " is not defined!");
+                module_div.style.backgroundColor = '#f66';
             } else {
                 console.log("Testing " + module.name + "...");
                 for (let i = 0; i < module.tests.length; i++) {
@@ -320,9 +324,15 @@ function load() {
                         console.log(test_expect +
                                     ' was expected but got ' +
                                     test_result);
+                        module_div.style.backgroundColor = '#fa6';
+                    } else {
+                        module_div.style.backgroundColor = '#9f9';
                     }
                 }
             }
+        } else {
+            // do nothing with the module
+            module_div.style.backgroundColor = '#fff';
         }
     });
 }
