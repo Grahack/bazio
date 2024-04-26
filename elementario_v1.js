@@ -300,13 +300,13 @@ function load() {
         // grab the value of the relevant radio button
         const rb_u = document.getElementById(module.name + '_U').checked;
         const rb_t = document.getElementById(module.name + '_T').checked;
-        // use module
         if (rb_u) {
+            // use module
             console.log("Using " + module.name);
             window[module.name] = module.fn;
         }
-        // test module
         if (rb_t) {
+            // test module
             const fn = window[module.name];
             if (typeof fn !== "function") {
                 console.log(module.name + " is not defined!");
