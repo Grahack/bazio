@@ -173,27 +173,72 @@ window.addEventListener('resize', adjust_size);
 adjust_size();
 console.log(SVGs);
 
-const modules = ['abcdef', 'ghi', 'jkl', 'mno', 'pqr', 'stu', 'vwx'];
+function util_num_to_bin_str(n) {
+     return n.toString(2).padStart(8, '0');
+}
+
+function util_list_to_num(l) {
+    let decimal = 0;
+    for (let i = 0; i < l.length; i++) {
+         decimal += l[i] * Math.pow(2, l.length - 1 - i);
+    }
+    return decimal;
+}
+
+function util_str_to_list(s) {
+    return s.split('').map(function (c) {return Number(c)});
+}
+
+function util_list_to_str(l) {
+     return l.join('').padStart(8, '0');
+}
+
+const numbers_0_to_127 = Array.from(Array(128).keys());
+const all_bytes = numbers_0_to_127.map(function (n) {
+    return util_str_to_list(util_num_to_bin_str(n));
+});
+
+const modules = [
+    {name:'number_to_bin_str',
+     fn: util_num_to_bin_str,
+     tests: numbers_0_to_127},
+    {name:'number_to_dec_str',
+     fn: function (n) {return n.toString();},
+     tests: numbers_0_to_127},
+    {name:'number_to_hex_str',
+     fn: function (n) {return n.toString(16);},
+     tests: numbers_0_to_127},
+    {name:'list_to_number',
+     fn: util_list_to_num,
+     tests: all_bytes},
+    {name:'list_to_bin_str',
+     fn: util_list_to_str,
+     tests: all_bytes},
+    {name:'list_to_dec_str',
+     fn: function (l) {return util_list_to_num(l).toString();},
+     tests: all_bytes}
+];
+
 var modules_container = document.createElement('div');
 modules_container.className = 'modules';
 document.body.appendChild(modules_container);
 modules.forEach(function (module) {
     var elt = document.createElement('div');
     elt.className = 'module';
-    elt.innerHTML = module;
+    elt.innerHTML = module.name;
     modules_container.appendChild(elt);
     var radioGroup = document.createElement('span');
     const actions = ['0', 'U', 'T'];
     actions.forEach(function (action) {
         var radio = document.createElement('input');
         radio.type = 'radio';
-        radio.value = module + '_' + action;
-        radio.name = module;
-        radio.id = module + '_' + action;
+        radio.value = module.name + '_' + action;
+        radio.name = module.name;
+        radio.id = module.name + '_' + action;
         if (action == '0') radio.checked = true;
         radioGroup.appendChild(radio);
         var label = document.createElement('label');
-        label.htmlFor = module + '_' + action;
+        label.htmlFor = module.name + '_' + action;
         label.textContent = action;
         label.className = 'module-label';
         radioGroup.appendChild(label);
@@ -251,4 +296,33 @@ function load() {
     const src = document.getElementById('src').value;
     console.log(src);
     window.eval(src);  // indirect call to be effective globally
+    modules.forEach(function (module) {
+        // grab the value of the relevant radio button
+        const rb_u = document.getElementById(module.name + '_U').checked;
+        const rb_t = document.getElementById(module.name + '_T').checked;
+        // use module
+        if (rb_u) {
+            console.log("Using " + module.name);
+            window[module.name] = module.fn;
+        }
+        // test module
+        if (rb_t) {
+            const fn = window[module.name];
+            if (typeof fn !== "function") {
+                console.log(module.name + " is not defined!");
+            } else {
+                console.log("Testing " + module.name + "...");
+                for (let i = 0; i < module.tests.length; i++) {
+                    const arg = module.tests[i];
+                    const test_result = fn(arg);
+                    const test_expect =  module.fn(arg);
+                    if (test_expect !==  test_result) {
+                        console.log(test_expect +
+                                    ' was expected but got ' +
+                                    test_result);
+                    }
+                }
+            }
+        }
+    });
 }
