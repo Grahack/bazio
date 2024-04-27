@@ -219,32 +219,51 @@ const modules = [
      tests: all_bytes}
 ];
 
-var modules_container = document.createElement('div');
-modules_container.className = 'modules';
-document.body.appendChild(modules_container);
-modules.forEach(function (module) {
+function build_radio_group(name) {
     var elt = document.createElement('div');
     elt.className = 'module';
-    elt.id = 'module_' + module.name;
-    elt.innerHTML = module.name;
-    modules_container.appendChild(elt);
+    elt.id = 'module_' + name;
+    elt.innerHTML = name;
     var radio_group = document.createElement('span');
     const actions = ['0', 'U', 'T'];
     actions.forEach(function (action) {
         var radio = document.createElement('input');
         radio.type = 'radio';
-        radio.value = module.name + '_' + action;
-        radio.name = module.name;
-        radio.id = module.name + '_' + action;
+        radio.value = name + '_' + action;
+        radio.name = name;
+        radio.id = name + '_' + action;
         if (action == '0') radio.checked = true;
         radio_group.appendChild(radio);
         var label = document.createElement('label');
-        label.htmlFor = module.name + '_' + action;
+        label.htmlFor = name + '_' + action;
         label.textContent = action;
         label.className = 'module-label';
         radio_group.appendChild(label);
     });
     elt.appendChild(radio_group);
+    return elt;
+}
+
+var modules_container = document.createElement('div');
+modules_container.className = 'modules';
+document.body.appendChild(modules_container);
+
+// control for 'all' modules
+modules_container.appendChild(build_radio_group('all'));
+const radio_buttons = document.querySelectorAll('input[name="all"]');
+for(const radio_button of radio_buttons) {
+    radio_button.addEventListener('change', function() {
+        const action_id = this.value[this.value.length-1];
+        modules.forEach(function (module) {
+            const rb = document.getElementById(module.name + '_' + action_id);
+            rb.checked = true;
+        });
+    });
+}
+
+// add each module
+modules.forEach(function (module) {
+    modules_container.appendChild(build_radio_group(module.name));
     module.innerHTML = module.innerHTML + ' ';
 });
 
