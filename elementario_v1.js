@@ -228,7 +228,7 @@ modules.forEach(function (module) {
     elt.id = 'module_' + module.name;
     elt.innerHTML = module.name;
     modules_container.appendChild(elt);
-    var radioGroup = document.createElement('span');
+    var radio_group = document.createElement('span');
     const actions = ['0', 'U', 'T'];
     actions.forEach(function (action) {
         var radio = document.createElement('input');
@@ -237,14 +237,14 @@ modules.forEach(function (module) {
         radio.name = module.name;
         radio.id = module.name + '_' + action;
         if (action == '0') radio.checked = true;
-        radioGroup.appendChild(radio);
+        radio_group.appendChild(radio);
         var label = document.createElement('label');
         label.htmlFor = module.name + '_' + action;
         label.textContent = action;
         label.className = 'module-label';
-        radioGroup.appendChild(label);
+        radio_group.appendChild(label);
     });
-    elt.appendChild(radioGroup);
+    elt.appendChild(radio_group);
     module.innerHTML = module.innerHTML + ' ';
 });
 
