@@ -4,10 +4,10 @@ const color_on  = '#0f0';
 const color_off = 'red';
 
 var toggle_state = [0, 0, 0, 0, 0, 0, 0, 0];
-var display_state = [[0, 0, 0, 0, 0, 0, 0],
-                     [0, 0, 0, 0, 0, 0, 0],
-                     [0, 0, 0, 0, 0, 0, 0],
-                     [0, 0, 0, 0, 0, 0, 0]];
+var _display_state = [[0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0]];
 
 function action(name, type) {
     const lastIndex = name.lastIndexOf('_');
@@ -81,19 +81,20 @@ function adjust_size() {
         document.body.clientHeight;
     console.log("Screen size:", screen_W, screen_H);
     const margin = 5;
-    // set up the 16:9 shape (U for unified)
-    const U_W = screen_W / 9;
-    const U_H = screen_H / 16;
+    // set up the 4:3 shape (U for unified)
+    const U_W = screen_W / 3;
+    const U_H = screen_H / 4;
     const small_side = (U_W < U_H)? 'w' : 'h';
     console.log("Small side is:", small_side);
     var W = 0;
     var H = 0;
     if (small_side == 'h') {
-        W = Math.floor(screen_H / 16 * 9);
-        H = screen_H;
+        const size_factor = 0.85;
+        W = Math.floor(screen_H / 4 * 3 * size_factor);
+        H = Math.floor(screen_H * size_factor);
     } else {
         W = screen_W;
-        H = Math.floor(screen_W / 9 * 16);
+        H = Math.floor(screen_W / 3 * 4);
     }
     console.log("Main frame size:", W, H);
     main_frame.setAttribute('viewBox', '0 0 ' + screen_W + ' ' + screen_H);
@@ -130,7 +131,7 @@ function adjust_size() {
             //   g
             // e   c
             //   d
-            const lit = display_state[i][j];
+            const lit = _display_state[i][j];
             SVGs[name].setAttribute('fill', lit? color_lit7 : color_unlit7);
             SVGs[name].setAttribute('stroke', 'white');
             SVGs[name].setAttribute('stroke-width', 1);
@@ -275,7 +276,7 @@ for (let i = 0; i <= 3; i++) {
         fns[name] = function (on_off) {
             SVGs['display_' + i + '_' + letter].setAttribute('fill',
                 on_off? color_lit7 : color_unlit7);
-            display_state[i][j] = on_off;
+            _display_state[i][j] = on_off;
         };
     }
 }
