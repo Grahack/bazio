@@ -1,0 +1,42 @@
+/* Thx https://www.codeconcisely.com/posts/javascript-tabs/ */
+/* I removed max-width: 500px; in .tabs */
+
+.tabs {
+  min-height: 300px;
+  border: 1px solid #ececec;
+  border-radius: 0.5rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+div[role="tablist"] {
+  display: flex;
+  gap: 0.25rem;
+  background-color: #d1d1d170;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+button[role="tab"] {
+  color: #67769e;
+  background: none;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.75rem 1.25rem;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+button[role="tab"][aria-selected="true"] {
+  background-color: #ffffff;
+  color: #07409f;
+}
+
+button[role="tab"][aria-selected="false"]:hover {
+  color: #000000;
+}
+
+div[role="tabpanel"] {
+  padding: 1rem;
+}

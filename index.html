@@ -4,22 +4,39 @@
         <title>ELEMENTARIO</title>
         <meta charset="utf-8"/>
         <link rel="stylesheet" type="text/css" href="style.css" />
+        <link rel="stylesheet" type="text/css" href="tabs.css" />
     </head>
     <body>
-        <p><a href="#doc">Documentation</a></p>
-        <script src="elementario_v1.js"></script>
-        <script src="app.js"></script>
-        <button onclick="load()" type="button">Charger</button>
+        <!-- Thx https://www.codeconcisely.com/posts/javascript-tabs/ -->
+<div class="tabs">
+    <div role="tablist">
+      <button id="tab-1" aria-selected="true" aria-controls="tab-panel-1"
+              role="tab" type="button">I/O</button>
+      <button id="tab-2" aria-selected="false" aria-controls="tab-panel-2"
+              role="tab" type="button">Code</button>
+      <button id="tab-3" aria-selected="false" aria-controls="tab-panel-3"
+              role="tab" type="button">Doc (fr)</button>
+      <button id="tab-4" aria-selected="false" aria-controls="tab-panel-4"
+              role="tab" type="button">Doc (en)</button>
+    </div>
+    <div id="tab-panel-1" aria-labelledby="tab-1" role="tabpanel">
+        <div id="elementario-io"></div>
+    </div>
+    <div id="tab-panel-2" aria-labelledby="tab-2" role="tabpanel" hidden>
+        <div id="elementario-modules"></div>
         <textarea id="src" rows="15" cols="80">
-// Tapez votre propre code ici
+// Tapez votre code ici
+// Put your own code here
 
 function press_7() {
     console.log(toggle_state)
     segment_3_d(1)
 }
         </textarea>
+        <button onclick="load()" type="button">Charger / Load</button>
+    </div>
+    <div id="tab-panel-3" aria-labelledby="tab-3" role="tabpanel" hidden>
         <h1 id="doc">ELEMENTARIO</h1>
-        <p><a href="index_en.html">English version</a></p>
         <h2>Entrées/Sorties élémentaires</h2>
         <h3>Boutons</h3>
         <p>Ils sont numérotés de 0 à 7 (de droite à gauche).</p>
@@ -73,5 +90,66 @@ e       c
         Pouvez-vous deviner ce que c’est ?</p>
         <p>Vous pouvez de plus charger votre propre code pour modifier le
         comportement d’Elementario grâce au bouton <em>Charger</em>.</p>
+    </div>
+    <div id="tab-panel-4" aria-labelledby="tab-4" role="tabpanel" hidden>
+        <h1>ELEMENTARIO</h1>
+        <h2>Elementary Input/Output</h2>
+        <h3>Buttons</h3>
+        <p>They are numbered from 0 to 7 (from right to left).</p>
+        <p>When released the toggle buttons (first line) will trigger the
+        following functions with no parameter on release:</p>
+        <ul>
+            <li><code>toggle_0</code> to <code>toggle_7</code></li>
+        </ul>
+
+        <p>The momentary buttons (second line) will trigger the following
+        functions with no parameter:</p>
+        <ul>
+            <li><code>press_0</code> to <code>press_7</code></li>
+            <li><code>release_0</code> to <code>release_7</code></li>
+        </ul>
+
+        <p>A variable holds the state of the toggle buttons:</p>
+        <p><code>toggle_state = [0, 0, 0, 0, 0, 0, 0, 0]</code></p>
+
+        <h3>Display</h3>
+        <p>4×7 functions have been defined for handling the display.
+        All take one parameter: 0 or 1. Here are the ones correponding to the
+        character on the right, numbered 0:</p>
+        <ul>
+            <li><code>segment_0_a(on_off)</code></li>
+            <li><code>segment_0_b(on_off)</code></li>
+            <li><code>segment_0_c(on_off)</code></li>
+            <li><code>segment_0_d(on_off)</code></li>
+            <li><code>segment_0_e(on_off)</code></li>
+            <li><code>segment_0_f(on_off)</code></li>
+            <li><code>segment_0_g(on_off)</code></li>
+        </ul>
+        <p>And the same for the displays number 1 to 3, from left to right.
+        Here is the correspondence between letter and position:</p>
+        <pre> -- a --
+|       |
+f       b
+|       |
+ -- g --
+|       |
+e       c
+|       |
+ -- d --</pre>
+        <p>The following function can be handy too.</p>
+        <ul>
+            <li><code>segment(place, seg, on_off)</code></li>
+        </ul>
+        <h2>Applications</h2>
+        <p>The preloaded app will display something related to the toggle
+        buttons when pressing the momentary 0 button (on the right). Can you
+        guess what it displays?</p>
+        <p>Moreover, you can load your own code to change the behaviour of
+        Elementario with the <em>Load</em> button.</p>
+  </div>
+</div>
+    <script src="tabs.js"></script>
+    <script src="elementario_v1.js"></script>
+    <script src="app.js"></script>
     </body>
 </html>

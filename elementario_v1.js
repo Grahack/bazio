@@ -9,6 +9,9 @@ var _display_state = [[0, 0, 0, 0, 0, 0, 0],
                       [0, 0, 0, 0, 0, 0, 0],
                       [0, 0, 0, 0, 0, 0, 0]];
 
+var io_div = document.getElementById('elementario-io');
+var modules_div = document.getElementById('elementario-modules');
+
 function action(name, type) {
     const lastIndex = name.lastIndexOf('_');
     const button = name.slice(0, lastIndex);
@@ -80,7 +83,7 @@ function adjust_size() {
         document.documentElement.clientHeight || 
         document.body.clientHeight;
     console.log("Screen size:", screen_W, screen_H);
-    const margin = 5;
+    const margin = 0;
     // set up the 4:3 shape (U for unified)
     const U_W = screen_W / 3;
     const U_H = screen_H / 4;
@@ -169,7 +172,7 @@ for (const [key, value] of Object.entries(SVGs)) {
     main_frame.appendChild(value);
 }
 
-document.body.appendChild(main_frame);
+io_div.appendChild(main_frame);
 window.addEventListener('resize', adjust_size);
 adjust_size();
 console.log(SVGs);
@@ -247,7 +250,7 @@ function build_radio_group(name) {
 
 var modules_container = document.createElement('div');
 modules_container.className = 'modules';
-document.body.appendChild(modules_container);
+modules_div.appendChild(modules_container);
 
 // control for 'all' modules
 modules_container.appendChild(build_radio_group('all'));
