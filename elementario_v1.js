@@ -184,7 +184,7 @@ function util_num_to_bin_str(n) {
 function util_list_to_num(l) {
     let decimal = 0;
     for (let i = 0; i < l.length; i++) {
-         decimal += l[i] * Math.pow(2, l.length - 1 - i);
+         decimal += l[i] * Math.pow(2, i);
     }
     return decimal;
 }
