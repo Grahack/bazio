@@ -37,6 +37,6 @@ button[role="tab"][aria-selected="false"]:hover {
   color: #000000;
 }
 
-div[role="tabpanel"] {
+div.codepanel, div.docpanel {
   padding: 1rem;
 }
