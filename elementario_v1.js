@@ -127,7 +127,7 @@ function adjust_size() {
     ];
     for (let i = 0; i <= 3; i++) {
         const x0 = screen_W/2 - W/2 + (3-i)*W/4 + W/24;
-        const y0 = screen_H/2 - H/2 + H/6;
+        const y0 = screen_H/2 - H/2 + H/8;
         for (let j = 0; j <= 6; j++) {
             var name = 'display_' + i + '_' + segment_names[j];
             //   a
@@ -147,14 +147,14 @@ function adjust_size() {
     }
 
     for (let i = 0; i <= 7; i++) {
-        const x = screen_W/2 - W/2 + (7-i)*W/8;
+        const x = screen_W/2 - W/2 + (7-i)*W/8 + W/125;
         var name = 'toggle_button_' + i;
         const lit = toggle_state[i];
         SVGs[name].setAttribute('fill', lit? color_on : color_off);
         SVGs[name].setAttribute('stroke', 'white');
         SVGs[name].setAttribute('stroke-width', 1);
         SVGs[name].setAttribute('x', x);
-        SVGs[name].setAttribute('y', screen_H/2 - H/2 + 4*H/6);
+        SVGs[name].setAttribute('y', screen_H/2 - H/2 + 6*H/10);
         SVGs[name].setAttribute('width', W/9);
         SVGs[name].setAttribute('height', H/9);
         var name = 'momentary_button_' + i;
@@ -162,7 +162,7 @@ function adjust_size() {
         SVGs[name].setAttribute('stroke', 'white');
         SVGs[name].setAttribute('stroke-width', 1);
         SVGs[name].setAttribute('x', x);
-        SVGs[name].setAttribute('y', screen_H/2 - H/2 + 5*H/6);
+        SVGs[name].setAttribute('y', screen_H/2 - H/2 + 8*H/10);
         SVGs[name].setAttribute('width', W/9);
         SVGs[name].setAttribute('height', H/9);
     }
