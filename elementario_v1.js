@@ -104,10 +104,11 @@ function adjust_size() {
     main_frame.setAttribute('viewBox', '0 0 ' + screen_W + ' ' + screen_H);
     
     // configure the elements
+    const vert_glob_os = H/10;
     SVGs['main_rect'].setAttribute('fill', 'black');
     SVGs['main_rect'].setAttribute('stroke', 'black');
     SVGs['main_rect'].setAttribute('x', screen_W / 2 - W / 2);
-    SVGs['main_rect'].setAttribute('y', screen_H / 2 - H / 2);
+    SVGs['main_rect'].setAttribute('y', screen_H / 2 - H / 2 - vert_glob_os);
     SVGs['main_rect'].setAttribute('width', W);
     SVGs['main_rect'].setAttribute('height', H);
 
@@ -140,7 +141,7 @@ function adjust_size() {
             SVGs[name].setAttribute('stroke', 'white');
             SVGs[name].setAttribute('stroke-width', 1);
             SVGs[name].setAttribute('x', x0 + xywh[j][0]);
-            SVGs[name].setAttribute('y', y0 + xywh[j][1]);
+            SVGs[name].setAttribute('y', y0 + xywh[j][1] - vert_glob_os);
             SVGs[name].setAttribute('width',  xywh[j][2]);
             SVGs[name].setAttribute('height', xywh[j][3]);
         }
@@ -154,7 +155,7 @@ function adjust_size() {
         SVGs[name].setAttribute('stroke', 'white');
         SVGs[name].setAttribute('stroke-width', 1);
         SVGs[name].setAttribute('x', x);
-        SVGs[name].setAttribute('y', screen_H/2 - H/2 + 6*H/10);
+        SVGs[name].setAttribute('y', screen_H/2 - H/2 + 6*H/10 - vert_glob_os);
         SVGs[name].setAttribute('width', W/9);
         SVGs[name].setAttribute('height', H/9);
         var name = 'momentary_button_' + i;
@@ -162,7 +163,7 @@ function adjust_size() {
         SVGs[name].setAttribute('stroke', 'white');
         SVGs[name].setAttribute('stroke-width', 1);
         SVGs[name].setAttribute('x', x);
-        SVGs[name].setAttribute('y', screen_H/2 - H/2 + 8*H/10);
+        SVGs[name].setAttribute('y', screen_H/2 - H/2 + 8*H/10 - vert_glob_os);
         SVGs[name].setAttribute('width', W/9);
         SVGs[name].setAttribute('height', H/9);
     }
