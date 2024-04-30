@@ -199,30 +199,32 @@ function util_list_to_str(l) {
      return l.join('').padStart(8, '0');
 }
 
-const numbers_0_to_127 = Array.from(Array(128).keys());
-const all_bytes = numbers_0_to_127.map(function (n) {
-    return util_str_to_list(util_num_to_bin_str(n));
+const numbers_0_to_127 = Array.from(Array(128).keys()).map(function (elt) {
+    return [elt];
+});
+const all_bytes = numbers_0_to_127.map(function (elt) {
+    return [util_str_to_list(util_num_to_bin_str(elt[0]))];
 });
 
 const modules = [
     {name:'number_to_bin_str',
      fn: util_num_to_bin_str,
-     tests: numbers_0_to_127},
+     tests: {type: 'fn', args: numbers_0_to_127}},
     {name:'number_to_dec_str',
      fn: function (n) {return n.toString();},
-     tests: numbers_0_to_127},
+     tests: {type: 'fn', args: numbers_0_to_127}},
     {name:'number_to_hex_str',
      fn: function (n) {return n.toString(16);},
-     tests: numbers_0_to_127},
+     tests: {type: 'fn', args: numbers_0_to_127}},
     {name:'list_to_number',
      fn: util_list_to_num,
-     tests: all_bytes},
+     tests: {type: 'fn', args: all_bytes}},
     {name:'list_to_bin_str',
      fn: util_list_to_str,
-     tests: all_bytes},
+     tests: {type: 'fn', args: all_bytes}},
     {name:'list_to_dec_str',
      fn: function (l) {return util_list_to_num(l).toString();},
-     tests: all_bytes}
+     tests: {type: 'fn', args: all_bytes}}
 ];
 
 function build_radio_group(name) {
@@ -344,18 +346,22 @@ function load() {
                 module_div.style.backgroundColor = '#f66';
             } else {
                 console.log("Testing " + module.name + "...");
-                for (let i = 0; i < module.tests.length; i++) {
-                    const arg = module.tests[i];
-                    const test_result = fn(arg);
-                    const test_expect =  module.fn(arg);
-                    if (test_expect !==  test_result) {
-                        console.log(test_expect +
-                                    ' was expected but got ' +
-                                    test_result);
-                        module_div.style.backgroundColor = '#fa6';
-                    } else {
-                        module_div.style.backgroundColor = '#9f9';
-                    }
+                switch (module.tests.type) {
+                    case 'fn':
+                        for (let i = 0; i < module.tests.args.length; i++) {
+                            const args = module.tests.args[i];
+                            const test_result = fn(...args);
+                            const test_expect = module.fn(...args);
+                            if (test_expect !== test_result) {
+                                console.log(test_expect +
+                                            ' was expected but got ' +
+                                            test_result);
+                                module_div.style.backgroundColor = '#fa6';
+                            } else {
+                                module_div.style.backgroundColor = '#9f9';
+                            }
+                        }
+                        break;
                 }
             }
         } else {
