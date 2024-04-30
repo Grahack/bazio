@@ -3,6 +3,8 @@ const color_unlit7 = '#700';
 const color_on  = '#0f0';
 const color_off = 'red';
 
+const segment_names = ['a','b','c','d','e','f','g'];
+
 var toggle_state = [0, 0, 0, 0, 0, 0, 0, 0];
 var _display_state = [[0, 0, 0, 0, 0, 0, 0],
                       [0, 0, 0, 0, 0, 0, 0],
@@ -56,7 +58,7 @@ var SVGs = {
 
 for (let i = 0; i <= 3; i++) {
     for (let j = 0; j <= 6; j++) {
-        const name = 'display_' + i + '_' + ["a","b","c","d","e","f","g"][j];
+        const name = 'display_' + i + '_' + segment_names[j];
         SVGs[name] = document.createElementNS(NS, 'rect');
     }
 }
@@ -128,7 +130,7 @@ function adjust_size() {
         const x0 = screen_W/2 - W/2 + (3-i)*(W-2*margin)/4 + W/24;
         const y0 = screen_H/2 - H/2 + H/6;
         for (let j = 0; j <= 6; j++) {
-            var name = 'display_' + i + '_' + ["a","b","c","d","e","f","g"][j];
+            var name = 'display_' + i + '_' + segment_names[j];
             //   a
             // f   b
             //   g
@@ -274,7 +276,7 @@ modules.forEach(function (module) {
 var fns = {};
 for (let i = 0; i <= 3; i++) {
     for (let j = 0; j <= 6; j++) {
-        const letter = ["a","b","c","d","e","f","g"][j];
+        const letter = segment_names[j];
         const name = '' + i + '_' + letter;
         fns[name] = function (on_off) {
             SVGs['display_' + i + '_' + letter].setAttribute('fill',
