@@ -315,7 +315,10 @@ function segment_3_e(on_off) {fns['3_e'](on_off);}
 function segment_3_f(on_off) {fns['3_f'](on_off);}
 function segment_3_g(on_off) {fns['3_g'](on_off);}
 
-function segment(place, seg, on_off) {fns[place + '_' + seg](on_off);}
+function segment(place, seg, on_off) {
+    if (typeof seg === 'string') fns[place + '_' + seg](on_off);
+    else fns[place + '_' + segment_names[seg]](on_off);
+}
 
 function load() {
     console.log("Loading user src:");
