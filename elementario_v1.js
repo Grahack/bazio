@@ -85,7 +85,6 @@ function adjust_size() {
         document.documentElement.clientHeight || 
         document.body.clientHeight;
     console.log("Screen size:", screen_W, screen_H);
-    const margin = 0;
     // set up the 4:3 shape (U for unified)
     const U_W = screen_W / 3;
     const U_H = screen_H / 4;
@@ -107,10 +106,10 @@ function adjust_size() {
     // configure the elements
     SVGs['main_rect'].setAttribute('fill', 'black');
     SVGs['main_rect'].setAttribute('stroke', 'black');
-    SVGs['main_rect'].setAttribute('x', screen_W / 2 - W / 2 + margin);
-    SVGs['main_rect'].setAttribute('y', screen_H / 2 - H / 2 + margin);
-    SVGs['main_rect'].setAttribute('width', W-2*margin);
-    SVGs['main_rect'].setAttribute('height', H-2*margin);
+    SVGs['main_rect'].setAttribute('x', screen_W / 2 - W / 2);
+    SVGs['main_rect'].setAttribute('y', screen_H / 2 - H / 2);
+    SVGs['main_rect'].setAttribute('width', W);
+    SVGs['main_rect'].setAttribute('height', H);
 
     const h_os = W/25; // horiz offset
     const v_os = H/26; // vert offset
@@ -127,7 +126,7 @@ function adjust_size() {
         [h_os,        H/6,       h_len, H/thinner]   // g
     ];
     for (let i = 0; i <= 3; i++) {
-        const x0 = screen_W/2 - W/2 + (3-i)*(W-2*margin)/4 + W/24;
+        const x0 = screen_W/2 - W/2 + (3-i)*W/4 + W/24;
         const y0 = screen_H/2 - H/2 + H/6;
         for (let j = 0; j <= 6; j++) {
             var name = 'display_' + i + '_' + segment_names[j];
@@ -148,7 +147,7 @@ function adjust_size() {
     }
 
     for (let i = 0; i <= 7; i++) {
-        const x = screen_W/2 - W/2 + (7-i)*(W-2*margin)/8 + margin;
+        const x = screen_W/2 - W/2 + (7-i)*W/8;
         var name = 'toggle_button_' + i;
         const lit = toggle_state[i];
         SVGs[name].setAttribute('fill', lit? color_on : color_off);
