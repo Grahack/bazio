@@ -199,6 +199,14 @@ function util_list_to_str(l) {
      return l.join('').padStart(8, '0');
 }
 
+function util_reset_display() {
+    for (let i = 0; i <= 3; i++) {
+        for (let j = 0; j <= 6; j++) {
+            segment(i, j, 0);
+        }
+    }
+}
+
 const numbers_0_to_127 = Array.from(Array(128).keys()).map(function (elt) {
     return [elt];
 });
@@ -207,6 +215,9 @@ const all_bytes = numbers_0_to_127.map(function (elt) {
 });
 
 const modules = [
+    {name:'reset_display',
+     fn: util_reset_display,
+     tests: {type: 'display', args: [[]]}},
     {name:'number_to_bin_str',
      fn: util_num_to_bin_str,
      tests: {type: 'fn', args: numbers_0_to_127}},
@@ -322,6 +333,28 @@ function segment(place, seg, on_off) {
     else fns[place + '_' + segment_names[seg]](on_off);
 }
 
+function dc(a) {
+    let b = []
+    for (let i = 0; i <= 3; i++) {
+        let c = []
+        for (let j = 0; j <= 6; j++) {
+            c.push(a[i][j]);
+        }
+        b.push(c);
+    }
+    return b;
+}
+
+function diff_array(a1, a2) {
+    let diff = []
+    for (let i = 0; i <= 3; i++) {
+        for (let j = 0; j <= 6; j++) {
+            if (a1[i][j] !== a2[i][j]) diff.push([i, j]);
+        }
+    }
+    return diff;
+}
+
 function load() {
     console.log("Loading user src:");
     const src = document.getElementById('src').value;
@@ -347,6 +380,29 @@ function load() {
             } else {
                 console.log("Testing " + module.name + "...");
                 switch (module.tests.type) {
+                    case 'display':
+                        for (let i = 0; i < module.tests.args.length; i++) {
+                            const args = module.tests.args[i];
+                            // store current display
+                            const display_state_orig = dc(_display_state);
+                            // trigger user's fn and store resulting disp
+                            fn(...args);
+                            const disp_result = dc(_display_state);
+                            // same with the official fn
+                            module.fn(...args);
+                            const disp_expect = dc(_display_state);
+                            // diff the arrays
+                            const d = diff_array(disp_result, disp_expect);
+                            if (d.length > 0) {
+                                module_div.style.backgroundColor = '#fa6';
+                            } else {
+                                module_div.style.backgroundColor = '#9f9';
+                            }
+                            // put back the disp (var + actual display)
+                            _display_state = dc(display_state_orig);
+                            adjust_size();
+                        }
+                        break;
                     case 'fn':
                         for (let i = 0; i < module.tests.args.length; i++) {
                             const args = module.tests.args[i];
