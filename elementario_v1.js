@@ -240,7 +240,7 @@ const modules = [
 
 function build_radio_group(name) {
     var elt = document.createElement('div');
-    elt.className = 'module';
+    elt.classList.add('module', 'resp');
     elt.id = 'module_' + name;
     elt.innerHTML = name;
     var radio_group = document.createElement('span');
@@ -256,7 +256,7 @@ function build_radio_group(name) {
         var label = document.createElement('label');
         label.htmlFor = name + '_' + action;
         label.textContent = action;
-        label.className = 'module-label';
+        label.classList.add('module-label');
         radio_group.appendChild(label);
     });
     elt.appendChild(radio_group);
@@ -285,6 +285,16 @@ modules.forEach(function (module) {
     modules_container.appendChild(build_radio_group(module.name));
     module.innerHTML = module.innerHTML + ' ';
 });
+
+// window.devicePixelRatio: Indique au navigateur le nombre de pixels réels
+// qui sont utilisés pour dessiner un seul pixel CSS.
+// Surf: 1.25
+// S6 Edge: 22
+// A3: 16.5
+var elements = document.getElementsByClassName('resp');
+for (let i = 0; i < elements.length; i++) {
+    elements[i].style.fontSize = (100*window.devicePixelRatio) + '%';
+}
 
 var fns = {};
 for (let i = 0; i <= 3; i++) {

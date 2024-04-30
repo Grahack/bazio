@@ -11,13 +11,13 @@
 <div class="tabs">
     <div role="tablist">
       <button id="tab-1" aria-selected="true" aria-controls="tab-panel-1"
-              role="tab" type="button">I/O</button>
+              role="tab" type="button" class="resp">I/O</button>
       <button id="tab-2" aria-selected="false" aria-controls="tab-panel-2"
-              role="tab" type="button">Code</button>
+              role="tab" type="button" class="resp">Code</button>
       <button id="tab-3" aria-selected="false" aria-controls="tab-panel-3"
-              role="tab" type="button">Doc (fr)</button>
+              role="tab" type="button" class="resp">Doc (fr)</button>
       <button id="tab-4" aria-selected="false" aria-controls="tab-panel-4"
-              role="tab" type="button">Doc (en)</button>
+              role="tab" type="button" class="resp">Doc (en)</button>
     </div>
     <div id="tab-panel-1" aria-labelledby="tab-1" role="tabpanel">
         <div id="elementario-io"></div>
@@ -34,7 +34,7 @@ function press_7() {
     segment_3_d(1)
 }
         </textarea>
-        <button onclick="load()" type="button">Charger / Load</button>
+        <button onclick="load()" type="button" class="resp">Charger / Load</button>
     </div>
 
     <div id="tab-panel-3" aria-labelledby="tab-3" role="tabpanel"
@@ -77,7 +77,7 @@ function press_7() {
         </ul>
         <p>Idem pour les autres caractères, numérotés de 1 à 3 de droite à
         gauche. Voici la correspondance entre lettre et position :</p>
-        <pre> -- a --
+        <pre class="resp"> -- a --
 |       |
 f       b
 |       |
@@ -139,7 +139,7 @@ e       c
         </ul>
         <p>And the same for the other displays, numbered from 1 to 3, from left
         to right.  Here is the correspondence between letter and position:</p>
-        <pre> -- a --
+        <pre class="resp"> -- a --
 |       |
 f       b
 |       |
