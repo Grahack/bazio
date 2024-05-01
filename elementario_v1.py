@@ -1,9 +1,23 @@
 import tkinter
 from tkinter import ttk
 
+color_lit7 = '#0f0'
+color_unlit7 = '#700'
+color_on  = '#0f0'
+color_off = 'red'
+
 lang = 'fr'
+
 contents_fr = {
         "Load": "Charger"}
+
+segment_names = ['a','b','c','d','e','f','g']
+
+toggle_state = [0, 0, 0, 0, 0, 0, 0, 0]
+_display_state = [[0, 0, 0, 0, 0, 0, 0],
+                  [0, 0, 0, 0, 0, 0, 0],
+                  [0, 0, 0, 0, 0, 0, 0],
+                  [0, 0, 0, 0, 0, 0, 0]]
 
 def _(txt):
     if lang == 'fr':
@@ -51,6 +65,67 @@ canvas = tkinter.Canvas(tab_io, width=screen_W, height=screen_H)
 canvas.pack()
 canvas.create_rectangle(screen_W/2 - W/2, screen_H/2 - H/2,
                         screen_W/2 + W/2, screen_H/2 + H/2, fill="black")
+
+SVGs = {}
+
+h_os = W/25  # horiz offset
+v_os = H/26  # vert offset
+h_len = W/11 #  horiz length
+v_len = H/8  # vert length
+thinner = 30
+xywh = [
+    [h_os,          0,       h_len, H/thinner],  # a
+    [ W/7,       v_os,   W/thinner,     v_len],  # b
+    [ W/7, H/6 + v_os,   W/thinner,     v_len],  # c
+    [h_os,        H/3,       h_len, H/thinner],  # d
+    [   0, H/6 + v_os,   W/thinner,     v_len],  # e
+    [   0,       v_os,   W/thinner,     v_len],  # f
+    [h_os,        H/6,       h_len, H/thinner]   # g
+]
+
+for i in range(4):
+    x0 = screen_W/2 - W/2 + (3-i)*W/4 + W/24
+    y0 = screen_H/2 - H/2 + H/8
+    for j in range(7):
+        name = 'display_' + str(i) + '_' + segment_names[j]
+        SVGs[name] = canvas.create_rectangle(x0 + xywh[j][0],
+                                             y0 + xywh[j][1],
+                                             x0 + xywh[j][0] + xywh[j][2],
+                                             y0 + xywh[j][1] + xywh[j][3],
+            outline="white", fill=color_unlit7)
+        #   a
+        # f   b
+        #   g
+        # e   c
+        #   d
+        lit = _display_state[i][j]
+        #SVGs[name].setAttribute('fill', color_lit7 if lit else color_unlit7)
+        #SVGs[name].setAttribute('stroke', 'white')
+        #SVGs[name].setAttribute('stroke-width', 1)
+
+for i in range(8):
+    x = screen_W/2 - W/2 + (7-i)*W/8 + W/125
+
+    name = 'toggle_button_' + str(i)
+    y = screen_H/2 - H/2 + 6*H/10
+    SVGs[name] = canvas.create_rectangle(x, y, x + W/9, y + H/9,
+            outline="white", fill=color_off)
+    lit = toggle_state[i]
+    #SVGs[name].setAttribute('fill', color_on if lit else color_off)
+    #SVGs[name].setAttribute('stroke', 'white')
+    #SVGs[name].setAttribute('stroke-width', 1)
+    #SVGs[name].addEventListener("mousedown", action(name, 'press'))
+    #SVGs[name].addEventListener("mouseup", action(name, 'release'))
+
+    name = 'momentary_button_' + str(i)
+    y = screen_H/2 - H/2 + 8*H/10
+    SVGs[name] = canvas.create_rectangle(x, y, x + W/9, y + H/9,
+            outline="white", fill=color_off)
+    #SVGs[name].addEventListener("mousedown", action(name, 'press'))
+    #SVGs[name].addEventListener("mouseup", action(name, 'release'))
+    #SVGs[name].setAttribute('fill', color_off)
+    #SVGs[name].setAttribute('stroke', 'white')
+    #SVGs[name].setAttribute('stroke-width', 1)
 
 # code tab
 
