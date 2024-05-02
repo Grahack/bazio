@@ -39,23 +39,31 @@ tabControl.add(tabs_doc['fr'], text='Doc (fr)')
 tabControl.add(tabs_doc['en'], text='Doc (en)')
 tabControl.pack(expand=1, fill="both")
 
-screen_W = root.winfo_screenwidth()
-screen_H = root.winfo_screenheight()
+# Geometry
 
-print("Screen size:", screen_W, screen_H)
-# set up the 4:3 shape (U for unified)
-U_W = screen_W / 3
-U_H = screen_H / 4
-small_side = 'w' if (U_W < U_H) else 'h'
-print("Small side is:", small_side)
-W = 0
+W = 0  # these are real globals
 H = 0
-if small_side == 'h':
-    W = screen_H / 4 * 3
-    H = screen_H
-else:
-    W = screen_W
-    H = screen_W / 3 * 4
+screen_W = 0
+screen_H = 0
+
+def compute_W_and_H():
+    global W, H, screen_W, screen_H
+    screen_W = root.winfo_screenwidth()
+    screen_H = root.winfo_screenheight()
+    print("Screen size:", screen_W, screen_H)
+    # set up the 4:3 shape (U for unified)
+    U_W = screen_W / 3
+    U_H = screen_H / 4
+    small_side = 'w' if (U_W < U_H) else 'h'
+    print("Small side is:", small_side)
+    if small_side == 'h':
+        W = screen_H / 4 * 3
+        H = screen_H
+    else:
+        W = screen_W
+        H = screen_W / 3 * 4
+
+compute_W_and_H()
 
 # io tab
 
