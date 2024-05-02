@@ -26,8 +26,6 @@ def _(txt):
 
 root = tkinter.Tk()
 root.title('Elementario')
-root.attributes("-fullscreen", True)
-
 
 tabControl = ttk.Notebook(root)
 tab_io     = ttk.Frame(tabControl)
