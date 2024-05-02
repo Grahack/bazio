@@ -158,6 +158,9 @@ def press_7():
     segment_3_d(1)
 """
 
+def load():
+    print("Loading...")
+
 frame_code = tkinter.Frame(tab_code)
 s_bar = tkinter.Scrollbar(frame_code)
 s_bar.pack(side=tkinter.RIGHT, fill=tkinter.BOTH)
@@ -167,6 +170,8 @@ source.pack(fill=tkinter.BOTH, expand=tkinter.TRUE)
 source.insert('1.0', base_src)
 source.config(yscrollcommand=s_bar.set)
 s_bar.config(command=source.yview)
+button = tkinter.Button(tab_code, text=_("Load"), command=load)
+button.pack()
 
 # docs tabs
 
@@ -296,10 +301,5 @@ for lang in ['fr', 'en']:
     texts[lang].config(yscrollcommand=s_bars[lang].set)
     s_bars[lang].config(command=texts[lang].yview)
     
-def load():
-    print("Loading...")
-
-bouton = tkinter.Button(tab_code, text=_("Load"), command=load)
-bouton.pack()
 
 root.mainloop()
