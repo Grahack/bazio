@@ -103,29 +103,44 @@ for i in range(4):
         #SVGs[name].setAttribute('stroke', 'white')
         #SVGs[name].setAttribute('stroke-width', 1)
 
+def pressed(name):
+    def r(event):
+        print(name + " pressed!")
+        if name.startswith('toggle'):
+            pass
+        if name.startswith('momentary'):
+            canvas.itemconfigure(SVGs[name], fill=color_on)
+    return r
+
+def released(name):
+    def r(event):
+        print(name + " released!")
+        num = int(name[-1])
+        if name.startswith('toggle'):
+            toggle_state[num] = 1 - toggle_state[num]
+            canvas.itemconfigure(SVGs[name],
+                             fill=color_on if toggle_state[num] else color_off)
+        if name.startswith('momentary'):
+            canvas.itemconfigure(SVGs[name], fill=color_off)
+    return r
+
 for i in range(8):
     x = screen_W/2 - W/2 + (7-i)*W/8 + W/125
 
     name = 'toggle_button_' + str(i)
     y = screen_H/2 - H/2 + 6*H/10
-    SVGs[name] = canvas.create_rectangle(x, y, x + W/9, y + H/9,
-            outline="white", fill=color_off)
     lit = toggle_state[i]
-    #SVGs[name].setAttribute('fill', color_on if lit else color_off)
-    #SVGs[name].setAttribute('stroke', 'white')
-    #SVGs[name].setAttribute('stroke-width', 1)
-    #SVGs[name].addEventListener("mousedown", action(name, 'press'))
-    #SVGs[name].addEventListener("mouseup", action(name, 'release'))
+    SVGs[name] = canvas.create_rectangle(x, y, x + W/9, y + H/9,
+            outline="white", fill=color_on if lit else color_off)
+    canvas.tag_bind(SVGs[name],'<ButtonPress-1>', pressed(name))
+    canvas.tag_bind(SVGs[name],'<ButtonRelease-1>', released(name))
 
     name = 'momentary_button_' + str(i)
     y = screen_H/2 - H/2 + 8*H/10
     SVGs[name] = canvas.create_rectangle(x, y, x + W/9, y + H/9,
             outline="white", fill=color_off)
-    #SVGs[name].addEventListener("mousedown", action(name, 'press'))
-    #SVGs[name].addEventListener("mouseup", action(name, 'release'))
-    #SVGs[name].setAttribute('fill', color_off)
-    #SVGs[name].setAttribute('stroke', 'white')
-    #SVGs[name].setAttribute('stroke-width', 1)
+    canvas.tag_bind(SVGs[name],'<ButtonPress-1>', pressed(name))
+    canvas.tag_bind(SVGs[name],'<ButtonRelease-1>', released(name))
 
 # code tab
 
