@@ -46,7 +46,7 @@ H = 0
 screen_W = 0
 screen_H = 0
 
-def compute_W_and_H():
+def compute_geometry():
     global W, H, screen_W, screen_H
     screen_W = root.winfo_screenwidth()
     screen_H = root.winfo_screenheight()
@@ -63,7 +63,7 @@ def compute_W_and_H():
         W = screen_W
         H = screen_W / 3 * 4
 
-compute_W_and_H()
+compute_geometry()
 
 # io tab
 
