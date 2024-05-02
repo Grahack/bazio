@@ -39,8 +39,6 @@ tabControl.add(tabs_doc['fr'], text='Doc (fr)')
 tabControl.add(tabs_doc['en'], text='Doc (en)')
 tabControl.pack(expand=1, fill="both")
 
-# io tab
-
 screen_W = root.winfo_screenwidth()
 screen_H = root.winfo_screenheight()
 
@@ -58,6 +56,8 @@ if small_side == 'h':
 else:
     W = screen_W
     H = screen_W / 3 * 4
+
+# io tab
 
 canvas = tkinter.Canvas(tab_io, width=screen_W, height=screen_H)
 canvas.pack()
