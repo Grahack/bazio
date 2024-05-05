@@ -343,6 +343,7 @@ function segment(place, seg, on_off) {
     else fns[place + '_' + segment_names[seg]](on_off);
 }
 
+// deep copy
 function dc(a) {
     let b = []
     for (let i = 0; i <= 3; i++) {
