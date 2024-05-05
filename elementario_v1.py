@@ -152,8 +152,8 @@ for i in range(8):
 
 # code tab
 
-base_src = """// Tapez votre code ici
-// Put your own code here
+base_src = """# Tapez votre code ici
+# Put your own code here
 
 def press_7():
     print(toggle_state)
