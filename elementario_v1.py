@@ -41,15 +41,22 @@ tabControl.pack(expand=1, fill="both")
 
 # Geometry
 
-W = 0  # these are real globals
-H = 0
+# these are real globals
 screen_W = 0
 screen_H = 0
+W = 0  # size of the black background
+H = 0
+h_os  = None  # horiz offset
+v_os  = None  # vert offset
+h_len = None  # horiz length
+v_len = None  # vert length
+xywh  = None
+thinner = 30  # constant
 
-def compute_geometry():
-    global W, H, screen_W, screen_H
-    screen_W = root.winfo_screenwidth()
-    screen_H = root.winfo_screenheight()
+def compute_geometry(w, h):
+    global screen_W, screen_H, W, H, h_os, v_os, h_len, v_len, xywh
+    screen_W = w
+    screen_H = h
     print("Screen size:", screen_W, screen_H)
     # set up the 4:3 shape (U for unified)
     U_W = screen_W / 3
@@ -62,52 +69,48 @@ def compute_geometry():
     else:
         W = screen_W
         H = screen_W / 3 * 4
+    h_os = W/25
+    v_os = H/26
+    h_len = W/11
+    v_len = H/8
+    xywh = [
+        [h_os,          0,       h_len, H/thinner],  # a
+        [ W/7,       v_os,   W/thinner,     v_len],  # b
+        [ W/7, H/6 + v_os,   W/thinner,     v_len],  # c
+        [h_os,        H/3,       h_len, H/thinner],  # d
+        [   0, H/6 + v_os,   W/thinner,     v_len],  # e
+        [   0,       v_os,   W/thinner,     v_len],  # f
+        [h_os,        H/6,       h_len, H/thinner]   # g
+    ]
 
-compute_geometry()
+compute_geometry(root.winfo_screenwidth(), root.winfo_screenheight())
 
 # io tab
 
+# some duplicate code here and in the 'resize' function :(
+
 canvas = tkinter.Canvas(tab_io, width=screen_W, height=screen_H)
 canvas.pack()
-canvas.create_rectangle(screen_W/2 - W/2, screen_H/2 - H/2,
-                        screen_W/2 + W/2, screen_H/2 + H/2, fill="black")
+bg = canvas.create_rectangle(screen_W/2 - W/2, screen_H/2 - H/2,
+                             screen_W/2 + W/2, screen_H/2 + H/2, fill="black")
 
 SVGs = {}
-
-h_os = W/25  # horiz offset
-v_os = H/26  # vert offset
-h_len = W/11 #  horiz length
-v_len = H/8  # vert length
-thinner = 30
-xywh = [
-    [h_os,          0,       h_len, H/thinner],  # a
-    [ W/7,       v_os,   W/thinner,     v_len],  # b
-    [ W/7, H/6 + v_os,   W/thinner,     v_len],  # c
-    [h_os,        H/3,       h_len, H/thinner],  # d
-    [   0, H/6 + v_os,   W/thinner,     v_len],  # e
-    [   0,       v_os,   W/thinner,     v_len],  # f
-    [h_os,        H/6,       h_len, H/thinner]   # g
-]
 
 for i in range(4):
     x0 = screen_W/2 - W/2 + (3-i)*W/4 + W/24
     y0 = screen_H/2 - H/2 + H/8
     for j in range(7):
+        #   a
+        # f   b
+        #   g
+        # e   c
+        #   d
         name = 'display_' + str(i) + '_' + segment_names[j]
         SVGs[name] = canvas.create_rectangle(x0 + xywh[j][0],
                                              y0 + xywh[j][1],
                                              x0 + xywh[j][0] + xywh[j][2],
                                              y0 + xywh[j][1] + xywh[j][3],
             outline="white", fill=color_unlit7)
-        #   a
-        # f   b
-        #   g
-        # e   c
-        #   d
-        lit = _display_state[i][j]
-        #SVGs[name].setAttribute('fill', color_lit7 if lit else color_unlit7)
-        #SVGs[name].setAttribute('stroke', 'white')
-        #SVGs[name].setAttribute('stroke-width', 1)
 
 def pressed(name):
     def r(event):
@@ -135,9 +138,8 @@ for i in range(8):
 
     name = 'toggle_button_' + str(i)
     y = screen_H/2 - H/2 + 6*H/10
-    lit = toggle_state[i]
     SVGs[name] = canvas.create_rectangle(x, y, x + W/9, y + H/9,
-            outline="white", fill=color_on if lit else color_off)
+            outline="white", fill=color_off)
     canvas.tag_bind(SVGs[name],'<ButtonPress-1>', pressed(name))
     canvas.tag_bind(SVGs[name],'<ButtonRelease-1>', released(name))
 
@@ -301,5 +303,28 @@ for lang in ['fr', 'en']:
     texts[lang].config(yscrollcommand=s_bars[lang].set)
     s_bars[lang].config(command=texts[lang].yview)
     
+def resize(event):
+    compute_geometry(event.width, event.height)
+    canvas.coords(bg, screen_W/2 - W/2, screen_H/2 - H/2,
+                      screen_W/2 + W/2, screen_H/2 + H/2)
+    for i in range(4):
+        x0 = screen_W/2 - W/2 + (3-i)*W/4 + W/24
+        y0 = screen_H/2 - H/2 + H/8
+        for j in range(7):
+            name = 'display_' + str(i) + '_' + segment_names[j]
+            canvas.coords(SVGs[name], x0 + xywh[j][0],
+                                      y0 + xywh[j][1],
+                                      x0 + xywh[j][0] + xywh[j][2],
+                                      y0 + xywh[j][1] + xywh[j][3])
+    for i in range(8):
+        x = screen_W/2 - W/2 + (7-i)*W/8 + W/125
+        name = 'toggle_button_' + str(i)
+        y = screen_H/2 - H/2 + 6*H/10
+        canvas.coords(SVGs[name], x, y, x + W/9, y + H/9)
+        name = 'momentary_button_' + str(i)
+        y = screen_H/2 - H/2 + 8*H/10
+        canvas.coords(SVGs[name], x, y, x + W/9, y + H/9)
+
+root.bind("<Configure>", resize)  # bg plus petit avec ça
 
 root.mainloop()
