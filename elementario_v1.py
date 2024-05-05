@@ -112,6 +112,12 @@ for i in range(4):
                                              y0 + xywh[j][1] + xywh[j][3],
             outline="white", fill=color_unlit7)
 
+def call(fn_name):
+    if fn_name in globals():
+        globals()[fn_name]()
+    else:
+        print(fn_name + ' not defined!')
+
 def pressed(name):
     def r(event):
         print(name + " pressed!")
@@ -119,6 +125,7 @@ def pressed(name):
             pass
         if name.startswith('momentary'):
             canvas.itemconfigure(SVGs[name], fill=color_on)
+            call('press_' + name[-1])
     return r
 
 def released(name):
@@ -129,8 +136,10 @@ def released(name):
             toggle_state[num] = 1 - toggle_state[num]
             canvas.itemconfigure(SVGs[name],
                              fill=color_on if toggle_state[num] else color_off)
+            call('toggle_' + name[-1])
         if name.startswith('momentary'):
             canvas.itemconfigure(SVGs[name], fill=color_off)
+            call('release_' + name[-1])
     return r
 
 for i in range(8):
