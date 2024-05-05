@@ -341,4 +341,23 @@ def resize(event):
 
 root.bind("<Configure>", resize)  # bg plus petit avec ça
 
+# Display functions
+for i in range(4):
+    for j in range(7):
+        letter = segment_names[j];
+        fn = 'segment_' + str(i) + '_' + letter;
+        seg = 'display_' + str(i) + '_' + segment_names[j]
+        src = 'def ' + fn + '(on_off):\n' + \
+              '    global display_state\n' + \
+              '    color = color_on if on_off else color_off\n' + \
+              '    canvas.itemconfigure(SVGs["' + seg + '"], fill=color)\n' + \
+              '    _display_state[i][j] = on_off'
+        exec(src, globals())
+
+def segment(place, seg, on_off):
+    if isinstance(seg, str):
+        globals()['segment_' + str(place) + '_' + seg](on_off)
+    else:
+        globals()['segment_' + str(place) + '_' + segment_names[seg]](on_off)
+
 root.mainloop()
