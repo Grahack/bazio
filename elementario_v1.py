@@ -1,3 +1,4 @@
+import os
 import tkinter
 from tkinter import ttk
 
@@ -185,6 +186,11 @@ def load():
     # code tab
     src = source.get("1.0", "end-1c")
     exec(src, globals())
+    # modules
+    for module in sorted(os.listdir(modules_dir)):
+        if module[-3:] == '.py':
+            print("Found module", module)
+            exec(open(os.path.join(modules_dir, module)).read(), globals())
 
 button = tkinter.Button(tab_code, text=_("Load"), command=load)
 button.pack()
