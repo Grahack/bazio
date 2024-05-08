@@ -355,7 +355,7 @@ for i in range(4):
         seg = 'display_' + str(i) + '_' + segment_names[j]
         src = 'def ' + fn + '(on_off):\n' + \
               '    global display_state\n' + \
-              '    color = color_on if on_off else color_off\n' + \
+              '    color = color_lit7 if on_off else color_unlit7\n' + \
               '    canvas.itemconfigure(SVGs["' + seg + '"], fill=color)\n' + \
               '    _display_state[i][j] = on_off'
         exec(src, globals())
