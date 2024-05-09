@@ -350,8 +350,8 @@ root.bind("<Configure>", resize)  # bg plus petit avec ça
 # Display functions
 for i in range(4):
     for j in range(7):
-        letter = segment_names[j];
-        fn = 'segment_' + str(i) + '_' + letter;
+        letter = segment_names[j]
+        fn = 'segment_' + str(i) + '_' + letter
         seg = 'display_' + str(i) + '_' + segment_names[j]
         src = 'def ' + fn + '(on_off):\n' + \
               '    global display_state\n' + \
