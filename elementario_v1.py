@@ -322,7 +322,7 @@ for lang in ['fr', 'en']:
     texts[lang]['state'] = 'disabled'
     texts[lang].config(yscrollcommand=s_bars[lang].set)
     s_bars[lang].config(command=texts[lang].yview)
-    
+
 def resize(event):
     compute_geometry(event.width, event.height)
     canvas.coords(bg, screen_W/2 - W/2, screen_H/2 - H/2,
