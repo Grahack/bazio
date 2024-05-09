@@ -207,10 +207,10 @@ function util_reset_display() {
     }
 }
 
-const numbers_0_to_127 = Array.from(Array(128).keys()).map(function (elt) {
+const numbers_0_to_255 = Array.from(Array(256).keys()).map(function (elt) {
     return [elt];
 });
-const all_bytes = numbers_0_to_127.map(function (elt) {
+const all_bytes = numbers_0_to_256.map(function (elt) {
     return [util_str_to_list(util_num_to_bin_str(elt[0]))];
 });
 
@@ -220,13 +220,13 @@ const modules = [
      tests: {type: 'display', args: [[]]}},
     {name:'number_to_bin_str',
      fn: util_num_to_bin_str,
-     tests: {type: 'fn', args: numbers_0_to_127}},
+     tests: {type: 'fn', args: numbers_0_to_255}},
     {name:'number_to_dec_str',
      fn: function (n) {return n.toString();},
-     tests: {type: 'fn', args: numbers_0_to_127}},
+     tests: {type: 'fn', args: numbers_0_to_255}},
     {name:'number_to_hex_str',
      fn: function (n) {return n.toString(16);},
-     tests: {type: 'fn', args: numbers_0_to_127}},
+     tests: {type: 'fn', args: numbers_0_to_255}},
     {name:'list_to_number',
      fn: util_list_to_num,
      tests: {type: 'fn', args: all_bytes}},
