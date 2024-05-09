@@ -180,7 +180,7 @@ adjust_size();
 console.log(SVGs);
 
 function util_num_to_bin_str(n) {
-     return n.toString(2).padStart(8, '0');
+    return n.toString(2).padStart(8, '0');
 }
 
 function util_list_to_num(l) {
@@ -196,7 +196,7 @@ function util_str_to_list(s) {
 }
 
 function util_list_to_str(l) {
-     return l.join('').padStart(8, '0');
+    return l.join('').padStart(8, '0');
 }
 
 function util_reset_display() {
