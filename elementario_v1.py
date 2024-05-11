@@ -163,6 +163,7 @@ for i in range(8):
 # code tab
 
 frame_code = tkinter.Frame(tab_code)
+frame_code.pack(expand=tkinter.TRUE)
 
 rbs_frame = tkinter.Text(frame_code, wrap=tkinter.WORD, width=60, height=10)
 rbs_frame.pack(fill=tkinter.BOTH, expand=tkinter.TRUE)
