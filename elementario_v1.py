@@ -165,8 +165,15 @@ for i in range(8):
 frame_code = tkinter.Frame(tab_code)
 frame_code.pack(expand=tkinter.TRUE)
 
+frame_mods = tkinter.Frame(frame_code)
+frame_mods.pack(expand=tkinter.TRUE)
+s_bar_mods = tkinter.Scrollbar(frame_mods)
+s_bar_mods.pack(side=tkinter.RIGHT, fill=tkinter.BOTH)
+
 rbs_frame = tkinter.Text(frame_mods, wrap=tkinter.WORD, width=60, height=5)
 rbs_frame.pack(fill=tkinter.BOTH, expand=tkinter.TRUE)
+rbs_frame.config(yscrollcommand=s_bar_mods.set)
+s_bar_mods.config(command=rbs_frame.yview)
 
 def util_num_to_bin_str(n):
     return bin(n)[2:].zfill(8)
@@ -238,6 +245,12 @@ for mod in modules:
 
 rbs_frame.configure(state="disabled")
 rbs_frame.configure(background='#ddd')
+rbs_frame.configure(selectbackground='#ddd')
+
+frame_src = tkinter.Frame(frame_code)
+frame_src.pack(expand=tkinter.TRUE)
+s_bar_src = tkinter.Scrollbar(frame_src)
+s_bar_src.pack(side=tkinter.RIGHT, fill=tkinter.BOTH)
 
 base_src = """# Tapez votre code ici
 # Put your own code here
@@ -247,14 +260,11 @@ def press_7():
     segment_3_d(1)
 """
 
-s_bar = tkinter.Scrollbar(frame_code)
-s_bar.pack(side=tkinter.RIGHT, fill=tkinter.BOTH)
-frame_code.pack(expand=tkinter.TRUE)
-source = tkinter.Text(frame_code)
+source = tkinter.Text(frame_src)
 source.pack(fill=tkinter.BOTH, expand=tkinter.TRUE)
 source.insert('1.0', base_src)
-source.config(yscrollcommand=s_bar.set)
-s_bar.config(command=source.yview)
+source.config(yscrollcommand=s_bar_src.set)
+s_bar_src.config(command=source.yview)
 
 def load():
     for k, v in mod_vars.items():
