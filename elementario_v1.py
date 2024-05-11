@@ -162,6 +162,8 @@ for i in range(8):
 
 # code tab
 
+frame_code = tkinter.Frame(tab_code)
+
 base_src = """# Tapez votre code ici
 # Put your own code here
 
@@ -170,7 +172,6 @@ def press_7():
     segment_3_d(1)
 """
 
-frame_code = tkinter.Frame(tab_code)
 s_bar = tkinter.Scrollbar(frame_code)
 s_bar.pack(side=tkinter.RIGHT, fill=tkinter.BOTH)
 frame_code.pack(expand=True)
