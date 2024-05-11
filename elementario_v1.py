@@ -164,6 +164,76 @@ for i in range(8):
 
 frame_code = tkinter.Frame(tab_code)
 
+rbs_frame = tkinter.Text(frame_code, wrap=tkinter.WORD, width=60, height=10)
+rbs_frame.pack(fill=tkinter.BOTH, expand=tkinter.TRUE)
+
+def util_num_to_bin_str(n):
+    return bin(n)[2:].zfill(8)
+
+def util_list_to_num(l):
+    decimal = 0
+    for bit in l:
+         decimal += bit * 2**i
+    return decimal
+
+def util_str_to_list(s):
+    return [int(c) for c in s]
+
+def util_list_to_str(l):
+    return ''.join([str(i) for i in l]).zfill(8)
+
+def util_reset_display():
+    for i in range(4):
+        for j in range(7):
+            segment(i, j, 0)
+
+numbers_0_to_255 = list(range(256))
+all_bytes = [util_str_to_list(util_num_to_bin_str(i)) for i in range(256)]
+
+modules = [
+    {'name':'reset_display',
+     'fn': util_reset_display,
+     'tests': {'type': 'display', 'args': [[]]}},
+    {'name':'number_to_bin_str',
+     'fn': util_num_to_bin_str,
+     'tests': {'type': 'fn', 'args': numbers_0_to_255}},
+    {'name':'number_to_dec_str',
+     'fn': str,
+     'tests': {'type': 'fn', 'args': numbers_0_to_255}},
+    {'name':'number_to_hex_str',
+     'fn': hex,
+     'tests': {'type': 'fn', 'args': numbers_0_to_255}},
+    {'name':'list_to_number',
+     'fn': util_list_to_num,
+     'tests': {'type': 'fn', 'args': all_bytes}},
+    {'name':'list_to_bin_str',
+     'fn': util_list_to_str,
+     'tests': {'type': 'fn', 'args': all_bytes}},
+    {'name':'list_to_dec_str',
+     'fn': lambda l: str(util_list_to_num(l)),
+     'tests': {'type': 'fn', 'args': all_bytes}}]
+mod_vars = {}
+
+for mod in modules:
+    name = mod['name']
+    rb_frame = tkinter.Frame(rbs_frame)
+    rb_frame.pack()
+    label = tkinter.Label(rb_frame, text=name)
+    label.grid(row=0, column=0)
+    mod_vars[name] = tkinter.StringVar(value="0")
+    rb_0 = tkinter.Radiobutton(rb_frame, text="0",
+            variable=mod_vars[name], value="0")
+    rb_0.grid(row=0, column=1)
+    rb_T = tkinter.Radiobutton(rb_frame, text="T",
+            variable=mod_vars[name], value="T",)
+    rb_T.grid(row=0, column=2)
+    rb_U = tkinter.Radiobutton(rb_frame, text="U",
+            variable=mod_vars[name], value="U")
+    rb_U.grid(row=0, column=3)
+
+rbs_frame.configure(state="disabled")
+rbs_frame.configure(background='#ddd')
+
 base_src = """# Tapez votre code ici
 # Put your own code here
 
@@ -182,6 +252,8 @@ source.config(yscrollcommand=s_bar.set)
 s_bar.config(command=source.yview)
 
 def load():
+    for k, v in mod_vars.items():
+        print(k, v.get())
     modules_dir = 'modules'
     print("Loading...")
     # code tab
