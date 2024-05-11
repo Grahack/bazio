@@ -165,7 +165,7 @@ for i in range(8):
 frame_code = tkinter.Frame(tab_code)
 frame_code.pack(expand=tkinter.TRUE)
 
-rbs_frame = tkinter.Text(frame_code, wrap=tkinter.WORD, width=60, height=10)
+rbs_frame = tkinter.Text(frame_mods, wrap=tkinter.WORD, width=60, height=5)
 rbs_frame.pack(fill=tkinter.BOTH, expand=tkinter.TRUE)
 
 def util_num_to_bin_str(n):
