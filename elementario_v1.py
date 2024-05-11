@@ -217,7 +217,7 @@ mod_vars = {}
 for mod in modules:
     name = mod['name']
     rb_frame = tkinter.Frame(rbs_frame)
-    rb_frame.pack()
+    rbs_frame.window_create("end", window=rb_frame)
     label = tkinter.Label(rb_frame, text=name)
     label.grid(row=0, column=0)
     mod_vars[name] = tkinter.StringVar(value="0")
