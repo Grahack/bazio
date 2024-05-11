@@ -244,7 +244,7 @@ def press_7():
 
 s_bar = tkinter.Scrollbar(frame_code)
 s_bar.pack(side=tkinter.RIGHT, fill=tkinter.BOTH)
-frame_code.pack(expand=True)
+frame_code.pack(expand=tkinter.TRUE)
 source = tkinter.Text(frame_code)
 source.pack(fill=tkinter.BOTH, expand=tkinter.TRUE)
 source.insert('1.0', base_src)
