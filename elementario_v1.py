@@ -231,6 +231,10 @@ for mod in modules:
     rb_U = tkinter.Radiobutton(rb_frame, text="U",
             variable=mod_vars[name], value="U")
     rb_U.grid(row=0, column=3)
+    # no spacer for the last module
+    if name != modules[-1]['name']:
+        spacer = tkinter.Label(rb_frame, text=" --- ")
+        spacer.grid(row=0, column=4)
 
 rbs_frame.configure(state="disabled")
 rbs_frame.configure(background='#ddd')
