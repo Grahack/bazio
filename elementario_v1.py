@@ -193,7 +193,7 @@ def load():
             print("Found module", module)
             exec(open(os.path.join(modules_dir, module)).read(), globals())
 
-button = tkinter.Button(tab_code, text=_("Load"), command=load)
+button = tkinter.Button(frame_code, text=_("Load"), command=load)
 button.pack()
 
 # docs tabs
