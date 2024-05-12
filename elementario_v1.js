@@ -210,7 +210,7 @@ function util_reset_display() {
 const numbers_0_to_255 = Array.from(Array(256).keys()).map(function (elt) {
     return [elt];
 });
-const all_bytes = numbers_0_to_256.map(function (elt) {
+const all_bytes = numbers_0_to_255.map(function (elt) {
     return [util_str_to_list(util_num_to_bin_str(elt[0]))];
 });
 
