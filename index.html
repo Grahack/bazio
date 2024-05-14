@@ -13,16 +13,22 @@
       <button id="tab-1" aria-selected="true" aria-controls="tab-panel-1"
               role="tab" type="button" class="resp">I/O</button>
       <button id="tab-2" aria-selected="false" aria-controls="tab-panel-2"
-              role="tab" type="button" class="resp">Code</button>
+              role="tab" type="button" class="resp">Blockly</button>
       <button id="tab-3" aria-selected="false" aria-controls="tab-panel-3"
-              role="tab" type="button" class="resp">Doc (fr)</button>
+              role="tab" type="button" class="resp">Code</button>
       <button id="tab-4" aria-selected="false" aria-controls="tab-panel-4"
+              role="tab" type="button" class="resp">Doc (fr)</button>
+      <button id="tab-5" aria-selected="false" aria-controls="tab-panel-5"
               role="tab" type="button" class="resp">Doc (en)</button>
     </div>
     <div id="tab-panel-1" aria-labelledby="tab-1" role="tabpanel">
         <div id="elementario-io"></div>
     </div>
     <div id="tab-panel-2" aria-labelledby="tab-2" role="tabpanel"
+        class="blocklypanel" hidden>
+        <div id="blocklyDiv" style="height: 600px; width: 800px;"></div>
+    </div>
+    <div id="tab-panel-3" aria-labelledby="tab-3" role="tabpanel"
         class="codepanel" hidden>
         <div id="elementario-modules"></div>
         <textarea id="src" rows="15" cols="80">
@@ -37,7 +43,7 @@ function press_7() {
         <button onclick="load()" type="button" class="resp">Charger / Load</button>
     </div>
 
-    <div id="tab-panel-3" aria-labelledby="tab-3" role="tabpanel"
+    <div id="tab-panel-4" aria-labelledby="tab-4" role="tabpanel"
         class="docpanel" hidden>
         <h1 id="doc">ELEMENTARIO</h1>
         <h2>Entrées/Sorties élémentaires</h2>
@@ -99,7 +105,7 @@ e       c
         <p>Vous pouvez de plus charger votre propre code pour modifier le
         comportement d’Elementario grâce au bouton <em>Charger</em>.</p>
     </div>
-    <div id="tab-panel-4" aria-labelledby="tab-4" role="tabpanel"
+    <div id="tab-panel-5" aria-labelledby="tab-5" role="tabpanel"
         class="docpanel" hidden>
         <h1>ELEMENTARIO</h1>
         <h2>Elementary Input/Output</h2>
@@ -165,5 +171,12 @@ e       c
     <script src="static/tabs.js"></script>
     <script src="elementario_v1.js"></script>
     <script src="app.js"></script>
+    <script src="blockly/blockly-10.4.3/blockly_compressed.js"></script>
+    <script src="blockly/blockly-10.4.3/blocks_compressed.js"></script>
+    <script src="blockly/blockly-10.4.3/javascript_compressed.js"></script>
+    <script src="blockly/blockly-10.4.3/msg/en.js"></script>
+    <script src="blockly/blockly_elementario_blocks.js"></script>
+    <script src="blockly/blockly_elementario_gens.js"></script>
+    <script src="blockly/blockly.js"></script>
     </body>
 </html>
