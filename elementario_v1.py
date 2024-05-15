@@ -6,6 +6,7 @@ color_lit7 = '#0f0'
 color_unlit7 = '#700'
 color_on  = '#0f0'
 color_off = 'red'
+background = '#ddd'
 
 lang = 'fr'
 
@@ -256,8 +257,8 @@ for mod in modules:
         rb_U.configure(command=rb_change)
 
 rbs_frame.configure(state="disabled")
-rbs_frame.configure(background='#ddd')
-rbs_frame.configure(selectbackground='#ddd')
+rbs_frame.configure(background=background)
+rbs_frame.configure(selectbackground=background)
 
 frame_src = tkinter.Frame(frame_code)
 frame_src.pack(expand=tkinter.TRUE)
