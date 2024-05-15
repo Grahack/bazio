@@ -199,6 +199,9 @@ numbers_0_to_255 = list(range(256))
 all_bytes = [util_str_to_list(util_num_to_bin_str(i)) for i in range(256)]
 
 modules = [
+    {'name':'ALL',
+     'fn': None,
+     'tests': None},
     {'name':'reset_display',
      'fn': util_reset_display,
      'tests': {'type': 'display', 'args': [[]]}},
@@ -222,6 +225,11 @@ modules = [
      'tests': {'type': 'fn', 'args': all_bytes}}]
 mod_vars = {}
 
+def rb_change():
+    action = mod_vars['ALL'].get()
+    for name in mod_vars:
+        mod_vars[name].set(action)
+
 for mod in modules:
     name = mod['name']
     rb_frame = tkinter.Frame(rbs_frame)
@@ -242,6 +250,10 @@ for mod in modules:
     if name != modules[-1]['name']:
         spacer = tkinter.Label(rb_frame, text=" --- ")
         spacer.grid(row=0, column=4)
+    if name == 'ALL':
+        rb_0.configure(command=rb_change)
+        rb_T.configure(command=rb_change)
+        rb_U.configure(command=rb_change)
 
 rbs_frame.configure(state="disabled")
 rbs_frame.configure(background='#ddd')
