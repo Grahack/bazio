@@ -280,14 +280,12 @@ source.config(yscrollcommand=s_bar_src.set)
 s_bar_src.config(command=source.yview)
 
 def load():
-    for k, v in mod_vars.items():
-        print(k, v.get())
-    modules_dir = 'modules'
     print("Loading...")
-    # code tab
+    # load the code in the code tab
     src = source.get("1.0", "end-1c")
     exec(src, globals())
-    # modules
+    # load code in the modules dir
+    modules_dir = 'modules'
     for module in sorted(os.listdir(modules_dir)):
         if module[-3:] == '.py':
             print("Found module", module)
