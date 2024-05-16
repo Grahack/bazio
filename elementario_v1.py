@@ -1,4 +1,4 @@
-import os
+import os, copy
 import tkinter
 from tkinter import ttk
 
@@ -229,6 +229,7 @@ modules = [
      'fn': lambda l: str(util_list_to_num(l)),
      'tests': {'type': 'fn', 'args': all_bytes}}]
 mod_vars = {}
+mod_labels = {}
 
 def rb_change():
     action = mod_vars['ALL'].get()
@@ -240,6 +241,7 @@ for mod in modules:
     rb_frame = tkinter.Frame(rbs_frame)
     rbs_frame.window_create("end", window=rb_frame)
     label = tkinter.Label(rb_frame, text=name)
+    mod_labels[name] = label
     label.grid(row=0, column=0)
     mod_vars[name] = tkinter.StringVar(value="0")
     rb_0 = tkinter.Radiobutton(rb_frame, text="0",
@@ -283,7 +285,16 @@ source.insert('1.0', base_src)
 source.config(yscrollcommand=s_bar_src.set)
 s_bar_src.config(command=source.yview)
 
+def diff_array(a1, a2):
+    diff = []
+    for i in range(4):
+        for j in range(7):
+            if a1[i][j] != a2[i][j]:
+                diff.append([i, j])
+    return diff
+
 def load():
+    global _display_state
     print("Loading...")
     # load the code in the code tab
     src = source.get("1.0", "end-1c")
@@ -294,6 +305,57 @@ def load():
         if module[-3:] == '.py':
             print("Found module", module)
             exec(open(os.path.join(modules_dir, module)).read(), globals())
+    # grab the value of the radio buttons and act accordingly
+    for mod in modules:
+        name = mod['name']
+        if name == 'ALL':
+            continue
+        checked = mod_vars[name].get()
+        if checked == 'U':
+            # use the function defined in this very file
+            globals()[name] = mod['fn']
+            mod_labels[name].configure(background='#aaf')
+        elif checked == 'T':
+            # test the code of the user
+            if name in globals():
+                print("Testing", name, "...")
+                mod_labels[name].configure(background='#9f9')
+                user_fn = globals()[name]
+                fn = mod['fn']
+                if mod['tests']['type'] == 'display':
+                    for args in mod['tests']['args']:
+                        # store current display
+                        display_state_orig = copy.deepcopy(_display_state)
+                        # trigger user's fn and store resulting disp
+                        user_fn(*args)
+                        disp_result = copy.deepcopy(_display_state)
+                        # same with the official fn
+                        fn(*args)
+                        disp_expect = copy.deepcopy(_display_state)
+                        # diff the arrays
+                        d = diff_array(disp_result, disp_expect)
+                        if d:
+                            mod_labels[name].configure(background='#fa6')
+                            print("Discrepancies on:")
+                            print(d)
+                        # put back the disp (var + actual display)
+                        _display_state = copy.deepcopy(display_state_orig)
+                        for i in range(3):
+                            for j in range(7):
+                                segment(i, j, _display_state[i][j])
+                elif mod['tests']['type'] == 'fn':
+                    for arg in mod['tests']['args']:
+                        result   = user_fn(arg)
+                        expected = fn(arg)
+                        if expected != result:
+                            print(expected, 'was expected but got', result)
+                            mod_labels[name].configure(background='#fa6')
+            else:
+                # undefined !
+                mod_labels[name].configure(background='#f66')
+        else:
+            # do nothing with the module
+            mod_labels[name].configure(background=background)
 
 button = tkinter.Button(frame_code, text=_("Load"), command=load)
 button.pack()
