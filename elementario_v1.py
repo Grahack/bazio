@@ -183,6 +183,9 @@ s_bar_mods.config(command=rbs_frame.yview)
 def util_num_to_bin_str(n):
     return bin(n)[2:].zfill(8)
 
+def util_num_to_hex_str(n):
+    return hex(n)[2:]
+
 def util_list_to_num(l):
     decimal = 0
     for bit in l:
@@ -217,7 +220,7 @@ modules = [
      'fn': str,
      'tests': {'type': 'fn', 'args': numbers_0_to_255}},
     {'name':'number_to_hex_str',
-     'fn': hex,
+     'fn': util_num_to_hex_str,
      'tests': {'type': 'fn', 'args': numbers_0_to_255}},
     {'name':'list_to_number',
      'fn': util_list_to_num,
