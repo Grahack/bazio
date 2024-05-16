@@ -417,6 +417,7 @@ function load() {
                         }
                         break;
                     case 'fn':
+                        module_div.style.backgroundColor = '#9f9';
                         for (let i = 0; i < module.tests.args.length; i++) {
                             const args = module.tests.args[i];
                             const test_result = fn(...args);
@@ -426,8 +427,6 @@ function load() {
                                             ' was expected but got ' +
                                             test_result);
                                 module_div.style.backgroundColor = '#fa6';
-                            } else {
-                                module_div.style.backgroundColor = '#9f9';
                             }
                         }
                         break;
