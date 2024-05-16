@@ -21,6 +21,10 @@ _display_state = [[0, 0, 0, 0, 0, 0, 0],
                   [0, 0, 0, 0, 0, 0, 0],
                   [0, 0, 0, 0, 0, 0, 0]]
 
+def debug(*info):
+    if False:
+        print(*info)
+
 def _(txt):
     if lang == 'fr':
         return contents_fr[txt]
@@ -59,12 +63,12 @@ def compute_geometry(w, h):
     global screen_W, screen_H, W, H, h_os, v_os, h_len, v_len, xywh
     screen_W = w
     screen_H = h
-    print("Screen size:", screen_W, screen_H)
+    debug("Screen size:", screen_W, screen_H)
     # set up the 4:3 shape (U for unified)
     U_W = screen_W / 3
     U_H = screen_H / 4
     small_side = 'w' if (U_W < U_H) else 'h'
-    print("Small side is:", small_side)
+    debug("Small side is:", small_side)
     if small_side == 'h':
         W = screen_H / 4 * 3
         H = screen_H
