@@ -13,7 +13,7 @@ lang = 'fr'
 contents_fr = {
         "Load": "Charger"}
 
-segment_names = ['a','b','c','d','e','f','g']
+segment_names = 'abcdefg'
 
 toggle_state = [0, 0, 0, 0, 0, 0, 0, 0]
 _display_state = [[0, 0, 0, 0, 0, 0, 0],
@@ -453,16 +453,19 @@ for i in range(4):
         fn = 'segment_' + str(i) + '_' + letter
         seg = 'display_' + str(i) + '_' + segment_names[j]
         src = 'def ' + fn + '(on_off):\n' + \
-              '    global display_state\n' + \
+              '    global _display_state\n' + \
               '    color = color_lit7 if on_off else color_unlit7\n' + \
               '    canvas.itemconfigure(SVGs["' + seg + '"], fill=color)\n' + \
               '    _display_state[i][j] = on_off'
         exec(src, globals())
 
 def segment(place, seg, on_off):
+    global _display_state
     if isinstance(seg, str):
         globals()['segment_' + str(place) + '_' + seg](on_off)
+        _display_state[place][segment_names.index(seg)] = on_off
     else:
         globals()['segment_' + str(place) + '_' + segment_names[seg]](on_off)
+        _display_state[place][seg] = on_off
 
 root.mainloop()
