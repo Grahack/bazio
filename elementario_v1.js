@@ -406,6 +406,8 @@ function load() {
                             const d = diff_array(disp_result, disp_expect);
                             if (d.length > 0) {
                                 module_div.style.backgroundColor = '#fa6';
+                                console.log("Discrepancies on:");
+                                console.log(d);
                             } else {
                                 module_div.style.backgroundColor = '#9f9';
                             }
