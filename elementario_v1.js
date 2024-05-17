@@ -138,7 +138,7 @@ function adjust_size() {
             //   d
             const lit = _display_state[i][j];
             SVGs[name].setAttribute('fill', lit? color_lit7 : color_unlit7);
-            SVGs[name].setAttribute('stroke', 'white');
+            SVGs[name].setAttribute('stroke', 'gray');
             SVGs[name].setAttribute('stroke-width', 1);
             SVGs[name].setAttribute('x', x0 + xywh[j][0]);
             SVGs[name].setAttribute('y', y0 + xywh[j][1] - vert_glob_os);
