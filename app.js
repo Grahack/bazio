@@ -1,24 +1,5 @@
-function number_from_toggle_buttons() {
-    number = 0
-    i = 0
-    while (i<=7) {
-        number = number + Math.pow(2, i) * toggle_state[i]
-        i = i + 1
-    }
-    return number
-}
-
-function hex_str() {
-    number = number_from_toggle_buttons()
-    hexString = number.toString(16)
-    return hexString
-}
-
 function press_0() {
-    str = hex_str()
-    console.log(str)
-    char = str.charAt(str.length-1)
-    display(0, char)
+    window.location = "http://grahack.github.io/elementario/index.html#doc-fr";
 }
 
 function display(place, char) {
@@ -113,6 +94,15 @@ function display(place, char) {
             segment(place, 'f', 1)
             segment(place, 'g', 1)
             break;
+        case ' ':
+            segment(place, 'a', 0)
+            segment(place, 'b', 0)
+            segment(place, 'c', 0)
+            segment(place, 'd', 0)
+            segment(place, 'e', 0)
+            segment(place, 'f', 0)
+            segment(place, 'g', 0)
+            break;
         case 'a':
             segment(place, 'a', 1)
             segment(place, 'b', 1)
@@ -167,5 +157,126 @@ function display(place, char) {
             segment(place, 'f', 1)
             segment(place, 'g', 1)
             break;
+        case 'g':
+            segment(place, 'a', 1)
+            segment(place, 'b', 1)
+            segment(place, 'c', 1)
+            segment(place, 'd', 1)
+            segment(place, 'e', 0)
+            segment(place, 'f', 1)
+            segment(place, 'g', 1)
+            break;
+        case 'h':
+            segment(place, 'a', 0)
+            segment(place, 'b', 0)
+            segment(place, 'c', 1)
+            segment(place, 'd', 0)
+            segment(place, 'e', 1)
+            segment(place, 'f', 1)
+            segment(place, 'g', 1)
+            break;
+        case 'i':
+            segment(place, 'a', 0)
+            segment(place, 'b', 0)
+            segment(place, 'c', 1)
+            segment(place, 'd', 0)
+            segment(place, 'e', 0)
+            segment(place, 'f', 0)
+            segment(place, 'g', 0)
+            break;
+        case 'l':
+            segment(place, 'a', 0)
+            segment(place, 'b', 0)
+            segment(place, 'c', 0)
+            segment(place, 'd', 1)
+            segment(place, 'e', 1)
+            segment(place, 'f', 1)
+            segment(place, 'g', 0)
+            break;
+        case 'm':
+        case 'n':
+            segment(place, 'a', 0)
+            segment(place, 'b', 0)
+            segment(place, 'c', 1)
+            segment(place, 'd', 0)
+            segment(place, 'e', 1)
+            segment(place, 'f', 0)
+            segment(place, 'g', 1)
+            break;
+        case 'o':
+            segment(place, 'a', 0)
+            segment(place, 'b', 0)
+            segment(place, 'c', 1)
+            segment(place, 'd', 1)
+            segment(place, 'e', 1)
+            segment(place, 'f', 0)
+            segment(place, 'g', 1)
+            break;
+        case 'p':
+            segment(place, 'a', 1)
+            segment(place, 'b', 1)
+            segment(place, 'c', 0)
+            segment(place, 'd', 0)
+            segment(place, 'e', 1)
+            segment(place, 'f', 1)
+            segment(place, 'g', 1)
+            break;
+        case 'r':
+            segment(place, 'a', 0)
+            segment(place, 'b', 0)
+            segment(place, 'c', 0)
+            segment(place, 'd', 0)
+            segment(place, 'e', 1)
+            segment(place, 'f', 0)
+            segment(place, 'g', 1)
+            break;
+        case 's':
+            segment(place, 'a', 1)
+            segment(place, 'b', 0)
+            segment(place, 'c', 1)
+            segment(place, 'd', 1)
+            segment(place, 'e', 0)
+            segment(place, 'f', 1)
+            segment(place, 'g', 1)
+            break;
+        case 't':
+            segment(place, 'a', 0)
+            segment(place, 'b', 0)
+            segment(place, 'c', 0)
+            segment(place, 'd', 1)
+            segment(place, 'e', 1)
+            segment(place, 'f', 1)
+            segment(place, 'g', 1)
+            break;
+        case 'u':
+            segment(place, 'a', 0)
+            segment(place, 'b', 0)
+            segment(place, 'c', 1)
+            segment(place, 'd', 1)
+            segment(place, 'e', 1)
+            segment(place, 'f', 0)
+            segment(place, 'g', 0)
+            break;
+        case 'H':
+            segment(place, 'a', 0)
+            segment(place, 'b', 1)
+            segment(place, 'c', 1)
+            segment(place, 'd', 0)
+            segment(place, 'e', 1)
+            segment(place, 'f', 1)
+            segment(place, 'g', 1)
+            break;
     }
 }
+
+var position = 0;
+const message = "     Hello press bottom right button ";
+
+(function(){
+    const txt = message.slice(position, position + 4);
+    console.log(position, txt);
+    for (i=0; i<4; i++) display(3-i, txt.charAt(i));
+    position = position + 1;
+    if (position == message.length) position = 0;
+    setTimeout(arguments.callee, 500);
+})();
