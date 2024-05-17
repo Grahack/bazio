@@ -104,6 +104,7 @@ function display(place, char) {
             segment(place, 'g', 0)
             break;
         case 'a':
+        case 'à':
             segment(place, 'a', 1)
             segment(place, 'b', 1)
             segment(place, 'c', 1)
@@ -121,6 +122,7 @@ function display(place, char) {
             segment(place, 'f', 1)
             segment(place, 'g', 1)
             break;
+        case 'C':
         case 'c':
             segment(place, 'a', 1)
             segment(place, 'b', 0)
@@ -270,7 +272,8 @@ function display(place, char) {
 }
 
 var position = 0;
-const message = "     Hello press bottom right button ";
+const message = "     Hello appuie sur le bouton en bas à droite " +
+                "     Hello press bottom right button ";
 
 (function(){
     const txt = message.slice(position, position + 4);
