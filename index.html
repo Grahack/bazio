@@ -118,12 +118,63 @@ e       c
                 faible coût (shield Arduino, ESP-32…).</li>
         </ol>
         <h2>Idées de mise en œuvre</h2>
-        <p>TODO</p>
+        <h3>Description en direction des élèves</h3>
+        <p>Voici une proposition de description rapide de la plateforme :
+        Elementario est un système très simple d’entrées et de sorties, que
+        l’on peut programmer pour obtenir des animations ou des jeux. Elle est
+        composée de :</p>
+        <ul>
+            <li>SORTIES : un « écran » de quatre caractères à sept
+                segments ;</li>
+            <li>ENTRÉES : deux rangées de boutons, la première ayant des
+                boutons à bascule, la seconde des boutons momentanés ;</li>
+            <li>éventuellement un affichage annexe pour débeuguer
+                (<code>console.log</code> en JS et <code>print</code> en
+                Python).</li>
+        </ul>
+        <p>Attention les sorties ne sont pas des entrées : l’affichage à sept
+           segment n’est pas cliquable ! De même, les entrées ne sont pas des
+           sorties : on ne peut pas changer l’état des boutons depuis le
+           programme.</p>
+        <p>On programme la plateforme en écrivant des fonctions, toutes
+           décrites avec précision au début de cette page. Si le code
+           informatique vous fait peur (onglet Code), vous pouvez programmer
+           avec des blocs (onglet Blockly).</p>
+        <h3>Mise en route</h3>
+        <p>Quelques idées de questions à poser aux élèves :</p>
+        <ul>
+            <li>Pour un caractère comportant 7 segments, combien peut-on avoir
+                de figures différentes ?</li>
+            <li>Sur la ligne des boutons à bascule, combien de combinaisons
+                différentes peut-on avoir ?</li>
+            <li>Pour quatre caractères à 7 segments, combien peut-on avoir
+                de possibilités d’affichage ?</li>
+            <li>Imaginer une petite application, un utilitaire, un jeu ou une
+                simple animation que l’on peut fabriquer avec cette
+                plateforme.</li>
+            <li>…</li>
+        </ul>
+        <p>Suivant les idées des élèves, on oriente le travail vers différents
+           concepts informatiques : décimal, binaire, hexadécimal, modularité,…
+           l’idée étant de toujours décomposer pour aller vers
+           le bas niveau, par exemple jusqu’aux portes logiques.</p>
+        <p>Je ne donne pas d’idée d’animation ou de jeu car je veux que les
+           élèves fassent le chemin tout seuls, ou au moins voient les idées
+           de leurs camarades.</p>
+        <h2>Version Python</h2>
+        <p>Une version Python permet de travailler avec ce langage mais aussi
+           d’organiser son travail avec des fichiers. Vous pouvez télécharger
+           le code depuis la page
+           <a href="https://github.com/Grahack/elementario"
+              target="_blank">Github</a>, seul le fichier <code>.py</code> est
+           nécessaire, il faut ranger ses fichiers dans le dossier
+           <code>modules</code>.</p>
         <h2>Contact</h2>
         <p><a href="mailto:profgra.org@gmail.com">email</a> -
            <a href="https://github.com/Grahack/elementario"
               target="_blank">github</a></p>
     </div>
+
     <div id="tab-panel-5" aria-labelledby="tab-5" role="tabpanel"
         class="docpanel" hidden>
         <h1>ELEMENTARIO</h1>
