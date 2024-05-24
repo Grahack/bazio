@@ -29,3 +29,27 @@ div.module {
 .module-label {
     font-family: monospace;
 }
+
+/* Thx https://developer.mozilla.org/fr/docs/Web/HTML/Element/figcaption */
+
+figure {
+  border: thin #c0c0c0 solid;
+  display: flex;
+  flex-flow: column;
+  padding: 5px;
+  max-width: 220px;
+  margin: auto;
+}
+
+img {
+  max-width: 300px;
+  max-height: 200px;
+}
+
+figcaption {
+  background-color: #222;
+  color: #fff;
+  font: italic smaller sans-serif;
+  padding: 3px;
+  text-align: center;
+}
